@@ -46,3 +46,23 @@ print("Interes:       S/ \(String(format: "%.2f", interesMonto))")
 print("Monto cuota:   S/ \(String(format: "%.2f", montoCuota))")
 print("Monto final:   S/ \(String(format: "%.2f", montoFinal))")
 print("-------------------------------------")
+
+
+print("\n-------------------------------------")
+print("       CRONOGRAMA DE PAGOS")
+print("-----------------------------------------")
+print("Mes\tMonto inicial\tCuota mensual\tResta x pagar")
+print("------------------------------------------")
+
+var saldoPendiente = montoFinal
+
+for mes in 1...planCuotas {
+    let montoInicialMes = saldoPendiente
+    saldoPendiente -= montoCuota
+
+    if saldoPendiente < 0 { saldoPendiente = 0.0 }
+
+    print("\(mes)\t\(String(format: "%.2f", montoInicialMes))\t\t\(String(format: "%.2f", montoCuota))\t\t\(String(format: "%.2f", saldoPendiente))")
+}
+
+print("----------------------------------------")
