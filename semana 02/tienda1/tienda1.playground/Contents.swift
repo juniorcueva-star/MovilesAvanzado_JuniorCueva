@@ -35,3 +35,14 @@ default:
 let interesMonto = montoTotalCompra * porcentajeInteres
 let montoFinal = montoTotalCompra + interesMonto
 let montoCuota = montoFinal / Double(planCuotas)
+
+
+print("\n---------------------------------")
+print("            PLAN DE PAGO")
+print("-----------------------------------")
+print("Producto:      \(producto)")
+print("Cuotas:        \(planCuotas) meses")
+print("Interes:       S/ \(String(format: "%.2f", interesMonto))")
+print("Monto cuota:   S/ \(String(format: "%.2f", montoCuota))")
+print("Monto final:   S/ \(String(format: "%.2f", montoFinal))")
+print("-------------------------------------")
