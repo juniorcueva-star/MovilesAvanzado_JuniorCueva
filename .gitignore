@@ -1,0 +1,16 @@
+﻿# Artefactos de compilacion Swift en Windows
+*.exe
+*.lib
+*.exp
+*.pdb
+*.obj
+.build/
+
+# Xcode / Playground
+*.xcuserstate
+xcuserdata/
+timeline.xctimeline
+
+# Sistema
+.DS_Store
+Thumbs.db
