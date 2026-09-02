@@ -113,3 +113,49 @@ for (nombre, edad) in edades {
     }
 }
 print("Mayores de 21: \(mayores)")
+
+
+// ===== EJERCICIO 3: SETS =====
+
+var numeros2: [Int] = []
+for i in 1...8 {
+    print("Número \(i):")
+    let n = Int(readLine() ?? "") ?? 0
+    numeros2.append(n)
+}
+print("Con duplicados: \(numeros2)")
+let sinDuplicados = Array(Set(numeros2)).sorted()
+print("Sin duplicados: \(sinDuplicados)")
+
+var lunes: Set<String> = []
+print("===== ASISTENCIA LUNES =====")
+for i in 1...4 {
+    print("Alumno \(i):")
+    lunes.insert(readLine() ?? "")
+}
+
+var martes: Set<String> = []
+print("===== ASISTENCIA MARTES =====")
+for i in 1...4 {
+    print("Alumno \(i):")
+    martes.insert(readLine() ?? "")
+}
+
+let ambosDias = lunes.intersection(martes)
+let soloLunes = lunes.subtracting(martes)
+let soloMartes = martes.subtracting(lunes)
+
+print("===== RESULTADOS =====")
+print("Ambos días: \(ambosDias)")
+print("Solo lunes: \(soloLunes)")
+print("Solo martes: \(soloMartes)")
+
+let a: Set = [1, 2, 3, 4, 5]
+let b: Set = [4, 5, 6, 7, 8]
+print(a.intersection(b))
+print(a.union(b).count)
+print(a.subtracting(b))
+
+var repetidos: Set = ["A", "B", "A", "C", "B"]
+print(repetidos.count)
+
