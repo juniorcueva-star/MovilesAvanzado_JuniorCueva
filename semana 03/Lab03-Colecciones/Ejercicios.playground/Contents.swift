@@ -74,3 +74,76 @@ print("Nota más alta: \(notaMasAlta) (\(alumnoMasAlto))")      // Muestra el me
 print("Nota más baja: \(notaMasBaja) (\(alumnoMasBajo))")      // Muestra el peor promedio y su dueño
 print("Aprobados: \(totalAprobados) de \(registroNotas.count)")               // Muestra cuantos aprobaron del total
 print("Porcentaje de aprobados: \(porcentajeAprobados)%")      // Muestra el porcentaje calculado
+
+
+// ===== EJERCICIO 7: INVENTARIO CON MENÚ (asistido por IA) =====
+
+var inventarioPrecios: [String: Double] = [:]                  // Diccionario que asocia cada producto con su precio
+var inventarioStocks: [String: Int] = [:]                      // Diccionario que asocia cada producto con su stock
+
+print("\n¿Cuántos productos desea registrar?")                 // Solicita la cantidad de productos
+let totalProd = Int(readLine() ?? "") ?? 0                     // Lee la cantidad y la convierte a entero
+
+for i in 1...totalProd {                                       // Repite el registro por cada producto
+    print("\nProducto \(i) - Nombre:")                         // Pide el nombre del producto actual
+    let nombre = readLine() ?? ""                              // Lee el nombre del producto
+    print("Precio:")                                           // Pide el precio unitario
+    let precio = Double(readLine() ?? "") ?? 0                 // Lee el precio y lo convierte a decimal
+    print("Stock:")                                            // Pide las unidades disponibles
+    let stock = Int(readLine() ?? "") ?? 0                     // Lee el stock y lo convierte a entero
+    inventarioPrecios[nombre] = precio                         // Guarda el precio usando el nombre como clave
+    inventarioStocks[nombre] = stock                           // Guarda el stock usando la misma clave
+}
+
+var salir = false                                              // Bandera que controla la salida del menu
+
+while !salir {                                                 // Repite el menu mientras la bandera sea falsa
+    print("\n===== MENÚ DE INVENTARIO =====")                  // Titulo del menu
+    print("1) Ver inventario")                                 // Opcion para listar todo
+    print("2) Buscar producto")                                // Opcion para buscar uno especifico
+    print("3) Stock bajo")                                     // Opcion para filtrar por stock
+    print("4) Valor total")                                    // Opcion para calcular el valor del inventario
+    print("5) Salir")                                          // Opcion para terminar el programa
+    print("Elija una opción:")                                 // Solicita la eleccion del usuario
+
+    let opcion = Int(readLine() ?? "") ?? 0                    // Lee la opcion y la convierte a entero
+
+    switch opcion {                                            // Evalua la opcion elegida
+    case 1:                                                    // Opcion ver inventario
+        print("\n===== INVENTARIO =====")                      // Titulo de la lista
+        for (nombre, precio) in inventarioPrecios {            // Recorre el diccionario de precios
+            if let stock = inventarioStocks[nombre] {          // Busca el stock de ese producto de forma segura
+                print("\(nombre) - S/. \(precio) - Stock: \(stock)")   // Muestra nombre, precio y stock
+            }
+        }
+    case 2:                                                    // Opcion buscar producto
+        print("\nNombre del producto a buscar:")               // Solicita el nombre a buscar
+        let buscado = readLine() ?? ""                         // Lee el nombre ingresado
+        if let precio = inventarioPrecios[buscado] {           // Verifica si existe en el diccionario
+            let stock = inventarioStocks[buscado] ?? 0         // Obtiene el stock, si no existe usa 0
+            print("\(buscado) - S/. \(precio) - Stock: \(stock)")     // Muestra los datos encontrados
+        } else {                                               // Si no existe la clave
+            print("Producto no encontrado")                    // Informa que no esta registrado
+        }
+    case 3:                                                    // Opcion stock bajo
+        print("\n===== STOCK BAJO (menos de 5) =====")         // Titulo del filtro
+        for (nombre, stock) in inventarioStocks {              // Recorre el diccionario de stocks
+            if stock < 5 {                                     // Filtra solo los que tienen menos de 5 unidades
+                print("\(nombre): \(stock) unidades")          // Muestra el producto y su stock
+            }
+        }
+    case 4:                                                    // Opcion valor total
+        var valorTotalInv = 0.0                                // Acumulador del valor del inventario
+        for (nombre, precio) in inventarioPrecios {            // Recorre cada producto con su precio
+            if let stock = inventarioStocks[nombre] {          // Obtiene el stock correspondiente
+                valorTotalInv += precio * Double(stock)        // Multiplica precio por stock y acumula
+            }
+        }
+        print("\nValor total del inventario: S/. \(valorTotalInv)")   // Muestra el valor calculado
+    case 5:                                                    // Opcion salir
+        salir = true                                           // Cambia la bandera para terminar el bucle
+        print("\nSaliendo del sistema...")                     // Mensaje de despedida
+    default:                                                   // Cualquier opcion no contemplada
+        print("\nOpción no válida")                            // Informa el error al usuario
+    }
+}
