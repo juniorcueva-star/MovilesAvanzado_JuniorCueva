@@ -108,3 +108,48 @@ if datosValidos {                                     // Solo procesa el carrito
     print("Puntos ganados:    \(puntos)")                         // Muestra los puntos de fidelidad
     print(separador)                                              // Linea inferior del ticket
 }
+
+
+
+
+// ===== EJERCICIO 7: JUEGO DE ADIVINANZA (asistido por IA) =====
+
+let numeroSecreto = 42                                    // Numero que el jugador debe adivinar
+
+let intentoA = 20                                         // Primer intento simulado del jugador
+let intentoB = 50                                         // Segundo intento simulado del jugador
+let intentoC = 35                                         // Tercer intento simulado del jugador
+let intentoD = 45                                         // Cuarto intento simulado del jugador
+let intentoE = 42                                         // Quinto intento simulado, coincide con el secreto
+
+var intentoActualJuego = intentoA                         // Guarda el intento que se esta evaluando
+var numeroDeIntento = 1                                   // Contador de intentos, empieza en 1
+var adivino = false                                       // Bandera que indica si ya acerto
+
+print("=== JUEGO DE ADIVINANZA ===")                      // Titulo del juego en consola
+
+while numeroDeIntento <= 5 && !adivino {                  // Repite mientras queden intentos y no haya acertado
+
+    if intentoActualJuego > numeroSecreto {               // El intento supera al numero secreto
+        print("Intento \(numeroDeIntento): \(intentoActualJuego) - Muy alto")   // Avisa que se paso
+    } else if intentoActualJuego < numeroSecreto {        // El intento es menor al numero secreto
+        print("Intento \(numeroDeIntento): \(intentoActualJuego) - Muy bajo")   // Avisa que se quedo corto
+    } else {                                              // Si no es mayor ni menor, es igual
+        print("Intento \(numeroDeIntento): \(intentoActualJuego) - ¡Correcto!") // Anuncia el acierto
+        adivino = true                                    // Marca la bandera para salir del bucle
+    }
+
+    if !adivino {                                         // Solo avanza al siguiente intento si fallo
+        if numeroDeIntento == 1 { intentoActualJuego = intentoB }   // Carga el segundo intento
+        if numeroDeIntento == 2 { intentoActualJuego = intentoC }   // Carga el tercer intento
+        if numeroDeIntento == 3 { intentoActualJuego = intentoD }   // Carga el cuarto intento
+        if numeroDeIntento == 4 { intentoActualJuego = intentoE }   // Carga el quinto intento
+        numeroDeIntento += 1                              // Incrementa el contador de intentos
+    }
+}
+
+if adivino {                                              // Verifica si el jugador acerto
+    print("Ganaste. Necesitaste \(numeroDeIntento) intentos")   // Muestra cuantos intentos uso
+} else {                                                  // Si el bucle termino sin acertar
+    print("Perdiste. El número era: \(numeroSecreto)")    // Revela el numero secreto
+}
