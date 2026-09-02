@@ -159,3 +159,37 @@ print(a.subtracting(b))
 var repetidos: Set = ["A", "B", "A", "C", "B"]
 print(repetidos.count)
 
+
+// ===== EJERCICIO 4: COMBINACIÓN DE COLECCIONES =====
+
+var precios: [String: Double] = [:]
+var stocks: [String: Int] = [:]
+
+print("¿Cuántos productos?")
+let n = Int(readLine() ?? "") ?? 0
+
+for i in 1...n {
+    print("Producto \(i) - Nombre:")
+    let nombre = readLine() ?? ""
+    print("Precio:")
+    let precio = Double(readLine() ?? "") ?? 0
+    print("Stock:")
+    let stock = Int(readLine() ?? "") ?? 0
+    precios[nombre] = precio
+    stocks[nombre] = stock
+}
+
+var valorInventario = 0.0
+for (nombre, precio) in precios {
+    if let stock = stocks[nombre] {
+        valorInventario += precio * Double(stock)
+    }
+}
+print("Valor total del inventario: S/. \(valorInventario)")
+
+print("===== STOCK BAJO =====")
+for (nombre, stock) in stocks {
+    if stock < 5 {
+        print("\(nombre): \(stock) unidades")
+    }
+}
