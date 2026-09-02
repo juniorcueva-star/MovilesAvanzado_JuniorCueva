@@ -85,3 +85,56 @@ if mesAdelanto > 0 {
 } else {
     print("No se registro ningun adelanto.")
 }
+
+
+
+
+// ===== PASO 4: CRONOGRAMA DE PAGOS =====
+
+var mesCalendario = 1
+var anio = 2026
+
+var saldoPendiente = montoFinal
+var mes = 1
+var totalPagado = 0.0
+
+print("\n---------------------------------------------------------------")
+print("                     CRONOGRAMA DE PAGOS")
+print("---------------------------------------------------------------")
+print("Mes\tFecha\t\tMonto inicial\tPago\t\tResta x pagar")
+print("---------------------------------------------------------------")
+
+while mes <= planCuotas && saldoPendiente > 0 {
+
+    let montoInicialMes = saldoPendiente
+
+    var pagoDelMes = montoCuota
+
+    if mes == mesAdelanto {
+        pagoDelMes = pagoDelMes + montoAdelanto
+    }
+
+    if pagoDelMes > saldoPendiente {
+        pagoDelMes = saldoPendiente
+    }
+
+    saldoPendiente = saldoPendiente - pagoDelMes
+    totalPagado = totalPagado + pagoDelMes
+
+    let fecha = "\(mesCalendario)/\(anio)"
+
+    print("\(mes)\t\(fecha)\t\t\(String(format: "%.2f", montoInicialMes))\t\t\(String(format: "%.2f", pagoDelMes))\t\t\(String(format: "%.2f", saldoPendiente))")
+
+    mesCalendario = mesCalendario + 1
+    if mesCalendario > 12 {
+        mesCalendario = 1
+        anio = anio + 1
+    }
+
+    mes = mes + 1
+}
+
+print("---------------------------------------------------------------")
+print("Total pagado:  S/ \(String(format: "%.2f", totalPagado))")
+print("Meses usados:  \(mes - 1) de \(planCuotas)")
+print("---------------------------------------------------------------")
