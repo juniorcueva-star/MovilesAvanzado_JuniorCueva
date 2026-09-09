@@ -130,3 +130,64 @@ class Conexion {
         print("     Ubicacion: \(ubicacion)")
     }
 }
+
+// sitema metro
+class SistemaMetro {
+    var lineas: [Linea]
+    var conexiones: [Conexion]
+
+    init() {
+        self.lineas = []
+        self.conexiones = []
+    }
+
+    func agregarLinea(_ l: Linea) {
+        lineas.append(l)
+    }
+
+    func agregarConexion(_ c: Conexion) {
+        conexiones.append(c)
+    }
+
+    func todasLasEstaciones() -> [Estacion] {
+        var todas: [Estacion] = []
+        for linea in lineas {
+            for e in linea.estaciones {
+                todas.append(e)
+            }
+        }
+        return todas
+    }
+
+    func marcarRepetidas() {
+        let todas = todasLasEstaciones()
+        for a in todas {
+            for b in todas {
+                if a.nombre == b.nombre && a.linea != b.linea {
+                    a.repetida = true
+                }
+            }
+        }
+    }
+
+    func tieneConexion(_ e: Estacion) -> Bool {
+        for c in conexiones {
+            if c.conecta(nombre: e.nombre, linea: e.linea) {
+                return true
+            }
+        }
+        return false
+    }
+
+    func mostrarLista(_ lista: [Estacion], titulo: String) {
+        print("")
+        print("--- \(titulo) ---")
+        if lista.count == 0 {
+            print("  No hay estaciones que cumplan el filtro.")
+        }
+        for e in lista {
+            print("  " + e.etiquetaConLinea())
+        }
+        print("  Total: \(lista.count) estaciones")
+    }
+}
