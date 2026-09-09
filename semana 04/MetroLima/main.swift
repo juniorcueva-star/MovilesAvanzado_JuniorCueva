@@ -396,4 +396,83 @@ extension SistemaMetro {
         }
         return lista
     }
-}                              
+}     
+
+
+// menu
+print("")
+print("------------------------------------------")
+print("   BIENVENIDO AL SISTEMA DE ")
+print("      METRO DE LIMA ")
+print("------------------------------------------")
+
+var salir = false
+
+while !salir {
+    print("")
+    print("Opciones:")
+    print("  1. Ver estaciones de una linea")
+    print("  2. Buscar una estacion")
+    print("  3. Ver conexiones entre lineas")
+    print("  4. Filtrar estaciones")
+    print("  5. Salir")
+    print("Elija una opcion:")
+
+    let opcion = Int(readLine() ?? "") ?? 0
+
+    switch opcion {
+    case 1:
+        print("Escriba el numero de linea (1 al 4):")
+        let numero = Int(readLine() ?? "") ?? 0
+        if numero >= 1 && numero <= 4 {
+            metro.lineas[numero - 1].mostrar()
+        } else {
+            print("Esa linea no existe.")
+        }
+
+    case 2:
+        print("Escriba el nombre de la estacion:")
+        let texto = readLine() ?? ""
+        let resultados = metro.buscarEstacion(texto)
+        if resultados.count == 0 {
+            print("No se encontro ninguna estacion con ese nombre.")
+        } else {
+            for e in resultados {
+                metro.mostrarDetalle(e)
+            }
+        }
+
+    case 3:
+        metro.mostrarConexiones()
+
+    case 4:
+        print("Filtros disponibles:")
+        print("  1. Estaciones en funcionamiento")
+        print("  2. Estaciones con ascensor confirmado")
+        print("  3. Estaciones sin ascensor")
+        print("  4. Estaciones que conectan con otra linea")
+        print("Elija un filtro:")
+        let filtro = Int(readLine() ?? "") ?? 0
+
+        switch filtro {
+        case 1:
+            metro.mostrarLista(metro.filtrarOperativas(), titulo: "ESTACIONES EN FUNCIONAMIENTO")
+        case 2:
+            metro.mostrarLista(metro.filtrarPorAscensor("Si"), titulo: "ESTACIONES CON ASCENSOR CONFIRMADO")
+        case 3:
+            metro.mostrarLista(metro.filtrarPorAscensor("No"), titulo: "ESTACIONES SIN ASCENSOR")
+        case 4:
+            metro.mostrarLista(metro.filtrarConConexion(), titulo: "ESTACIONES CON CONEXION A OTRA LINEA")
+        default:
+            print("Filtro no valido.")
+        }
+
+    case 5:
+        salir = true
+        print("")
+        print("Gracias por usar el sistema.")
+
+    default:
+        print("Opcion no valida.")
+    }
+}
