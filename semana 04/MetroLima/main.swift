@@ -289,3 +289,111 @@ metro.agregarConexion(Conexion(lineaA: "Linea 3", estacionA: "Conde de San Isidr
                                lineaB: "Linea 4", estacionB: "Conde de San Isidro",
                                tipo: "Transbordo integrado, ademas corredores azul y rojo",
                                ubicacion: "Arequipa con Javier Prado, San Isidro"))
+
+
+
+
+ // filtro y busquedas
+extension SistemaMetro {
+
+    func buscarEstacion(_ texto: String) -> [Estacion] {
+        var encontradas: [Estacion] = []
+        for e in todasLasEstaciones() {
+            if e.nombre.lowercased() == texto.lowercased() {
+                encontradas.append(e)
+            }
+        }
+        return encontradas
+    }
+
+    func mostrarDetalle(_ e: Estacion) {
+        print("")
+        print("------------------------------------------")
+        print("  ESTACION \(e.nombre.uppercased())")
+        print("------------------------------------------")
+        print("Linea: \(e.linea)")
+        if e.codigo != "" {
+            print("Codigo: \(e.codigo)")
+        }
+
+        for linea in lineas {
+            if linea.nombre == e.linea {
+                print("Posicion: \(e.orden) de \(linea.estaciones.count)")
+                if e.orden > 1 {
+                    print("Estacion anterior: \(linea.estaciones[e.orden - 2].nombre)")
+                }
+                if e.orden < linea.estaciones.count {
+                    print("Estacion siguiente: \(linea.estaciones[e.orden].nombre)")
+                }
+            }
+        }
+
+        if e.operativa {
+            print("Estado: En funcionamiento")
+        } else {
+            print("Estado: Aun no funciona")
+        }
+        print("Ascensor: \(e.ascensor)")
+
+        var tiene = false
+        for c in conexiones {
+            if c.conecta(nombre: e.nombre, linea: e.linea) {
+                if !tiene {
+                    print("")
+                    print("CONEXIONES:")
+                    tiene = true
+                }
+                print("  La \(e.linea) conecta aqui con la \(c.destino(nombre: e.nombre, linea: e.linea))")
+                print("  Tipo: \(c.tipo)")
+                print("  Ubicacion: \(c.ubicacion)")
+            }
+        }
+        if !tiene {
+            print("Conexiones: esta estacion no conecta con otras lineas")
+        }
+        print("------------------------------------------")
+    }
+
+    func mostrarConexiones() {
+        print("")
+        print("------------------------------------------")
+        print("   CONEXIONES ENTRE LINEAS")
+        print("------------------------------------------")
+        for c in conexiones {
+            c.mostrar()
+            print("")
+        }
+        print("Total: \(conexiones.count) conexiones")
+        print("------------------------------------------")
+    }
+
+    func filtrarOperativas() -> [Estacion] {
+        var lista: [Estacion] = []
+        for e in todasLasEstaciones() {
+            if e.operativa {
+                lista.append(e)
+            }
+        }
+        return lista
+    }
+
+    func filtrarPorAscensor(_ valor: String) -> [Estacion] {
+        var lista: [Estacion] = []
+        for e in todasLasEstaciones() {
+            if e.ascensor == valor {
+                lista.append(e)
+            }
+        }
+        return lista
+    }
+
+    func filtrarConConexion() -> [Estacion] {
+        var lista: [Estacion] = []
+        for e in todasLasEstaciones() {
+            if tieneConexion(e) {
+                lista.append(e)
+            }
+        }
+        return lista
+    }
+}                              
