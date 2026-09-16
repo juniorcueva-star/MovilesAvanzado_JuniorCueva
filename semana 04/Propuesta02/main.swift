@@ -76,3 +76,28 @@ class ClienteJuridico: Cliente {
         super.mostrarDatos()
     }
 }
+
+
+let cliente1 = ClienteNatural(codigo: "C001",
+                              direccion: "Av. Lima 123",
+                              fechaDeRegistro: "2025-04-03",
+                              numeroCuenta: "001-2025-000123",
+                              montoMinimoApertura: 500.0,
+                              nombreCompleto: "Juan Perez",
+                              dni: "12345678")
+
+let cliente2 = ClienteJuridico(codigo: "C002",
+                               direccion: "Jr. Empresas 456",
+                               fechaDeRegistro: "2025-04-01",
+                               numeroCuenta: "001-2025-000456",
+                               montoMinimoApertura: 3000.0,
+                               razonSocial: "Soluciones SAC",
+                               ruc: "20123456789",
+                               representanteLegal: "Maria Leon")
+
+let clientes: [Cliente] = [cliente1, cliente2]
+
+for cliente in clientes {
+    cliente.mostrarDatos()
+    print("------------------------")
+}
