@@ -46,7 +46,23 @@ class Estudiante {
         for curso in cursos {
             total += curso.cantidad
         }
+        
         return total
+    }
+        func subtotal() -> Double {
+        var suma = 0.0
+        for curso in cursos {
+            suma += curso.importe()
+        }
+        return suma
+    }
+
+    func igv() -> Double {
+        return subtotal() * 0.18
+    }
+
+    func totalConIgv() -> Double {
+        return subtotal() + igv()
     }
 }
 
