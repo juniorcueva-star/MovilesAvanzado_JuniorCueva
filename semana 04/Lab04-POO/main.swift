@@ -154,3 +154,89 @@ print(misteriosa.costoEnvio(monto: monto))
 // PREDICT 7: 0.0
 // monto = 2000 * (1 - 0.1) = 1800. Se ejecuta el costoEnvio de SucursalLima,
 // y como 1800 es mayor o igual a 1500, el envio es gratis.
+
+
+// CASO 2 - PARTE A: BIBLIOTECA 
+
+
+
+enum EstadoLibro {
+    case disponible, prestado
+}
+
+struct Libro {
+    let titulo: String
+    let autor: String
+    var estado: EstadoLibro = .disponible
+}
+
+class Biblioteca {
+    var libros: [Libro] = []
+
+    func agregar(libro: Libro) {
+        libros.append(libro)
+    }
+
+    func prestar(titulo: String) -> Bool {
+        for i in 0..<libros.count {
+            if libros[i].titulo == titulo {
+                if libros[i].estado == .disponible {
+                    libros[i].estado = .prestado
+                    print("Prestamo aprobado: \(titulo)")
+                    return true
+                } else {
+                    print("Error: \(titulo) ya esta prestado")
+                    return false
+                }
+            }
+        }
+        print("Error: no existe \(titulo)")
+        return false
+    }
+
+    func devolver(titulo: String) -> Bool {
+        for i in 0..<libros.count {
+            if libros[i].titulo == titulo {
+                if libros[i].estado == .prestado {
+                    libros[i].estado = .disponible
+                    print("Devolucion registrada: \(titulo)")
+                    return true
+                } else {
+                    print("Error: \(titulo) no esta prestado")
+                    return false
+                }
+            }
+        }
+        print("Error: no existe \(titulo)")
+        return false
+    }
+
+    func inventario() {
+        print("===== INVENTARIO =====")
+        for i in 0..<libros.count {
+            var textoEstado = ""
+            switch libros[i].estado {
+            case .disponible:
+                textoEstado = "disponible"
+            case .prestado:
+                textoEstado = "prestado"
+            }
+            print("\(libros[i].titulo) (\(libros[i].autor)) - \(textoEstado)")
+        }
+    }
+}
+
+
+let biblioteca = Biblioteca()
+
+biblioteca.agregar(libro: Libro(titulo: "Las aventuras de Junior", autor: "Junior Cueva"))
+biblioteca.agregar(libro: Libro(titulo: "Swift desde cero", autor: "Junior Cueva"))
+biblioteca.agregar(libro: Libro(titulo: "El metro de Lima", autor: "Junior Cueva"))
+
+_ = biblioteca.prestar(titulo: "Swift desde cero")
+_ = biblioteca.prestar(titulo: "Swift desde cero")
+_ = biblioteca.devolver(titulo: "Swift desde cero")
+_ = biblioteca.prestar(titulo: "El metro de Lima")
+_ = biblioteca.prestar(titulo: "Programacion en Kotlin")
+
+biblioteca.inventario()
