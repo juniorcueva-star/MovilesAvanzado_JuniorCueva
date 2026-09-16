@@ -23,3 +23,30 @@ struct Curso {
         return precioUnitario * Double(cantidad)
     }
 }
+
+// estudiante y sus cursos 
+class Estudiante {
+    let nombre: String
+    let dni: String
+    let tipo: TipoAlumno
+    var cursos: [Curso] = []
+
+    init(nombre: String, dni: String, tipo: TipoAlumno) {
+        self.nombre = nombre
+        self.dni = dni
+        self.tipo = tipo
+    }
+
+    func inscribir(curso: Curso) {
+        cursos.append(curso)
+    }
+
+    func totalCursos() -> Int {
+        var total = 0
+        for curso in cursos {
+            total += curso.cantidad
+        }
+        return total
+    }
+}
+
