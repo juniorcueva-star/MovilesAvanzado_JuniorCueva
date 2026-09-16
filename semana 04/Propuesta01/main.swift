@@ -86,5 +86,41 @@ class Estudiante {
     func totalFinal() -> Double {
         return totalConIgv() - descuentoPorCantidad() - descuentoTecsup()
     }
+
+        func mostrarFactura() {
+        let separador = String(repeating: "-", count: 40)
+
+        print("")
+        print("FACTURA DE CURSOS")
+        print("Estudiante: \(nombre)")
+        print("DNI: \(dni)")
+        print("Alumno de Tecsup: \(tipo.texto())")
+        print(separador)
+
+        for curso in cursos {
+            print("\(curso.nombre) x\(curso.cantidad) - S/ \(String(format: "%.2f", curso.importe()))")
+        }
+
+        print(separador)
+        print("Subtotal: S/ \(String(format: "%.2f", subtotal()))")
+        print("IGV (18%): S/ \(String(format: "%.2f", igv()))")
+        print("Total con IGV: S/ \(String(format: "%.2f", totalConIgv()))")
+
+        if descuentoPorCantidad() > 0 {
+            print("Descuento 10% por cantidad: -S/ \(String(format: "%.2f", descuentoPorCantidad()))")
+        }
+        if descuentoTecsup() > 0 {
+            print("Descuento especial Tecsup: -S/ \(String(format: "%.2f", descuentoTecsup()))")
+        }
+
+        print(separador)
+        print("TOTAL FINAL A PAGAR: S/ \(String(format: "%.2f", totalFinal()))")
+    }
 }
 
+
+let alumno = Estudiante(nombre: "Junior Cueva", dni: "78965412", tipo: .tecsup)
+alumno.inscribir(curso: Curso(nombre: "Swift Avanzado", precioUnitario: 450.0, cantidad: 1))
+alumno.inscribir(curso: Curso(nombre: "IA con Python", precioUnitario: 650.0, cantidad: 2))
+alumno.inscribir(curso: Curso(nombre: "Diseno UX/UI", precioUnitario: 500.0, cantidad: 1))
+alumno.mostrarFactura()
