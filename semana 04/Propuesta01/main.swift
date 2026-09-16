@@ -64,5 +64,27 @@ class Estudiante {
     func totalConIgv() -> Double {
         return subtotal() + igv()
     }
+
+        func aplicaDescuento() -> Bool {
+        return totalCursos() >= 3
+    }
+
+    func descuentoPorCantidad() -> Double {
+        if aplicaDescuento() {
+            return totalConIgv() * 0.10
+        }
+        return 0.0
+    }
+
+    func descuentoTecsup() -> Double {
+        if aplicaDescuento() && tipo == .tecsup {
+            return 400.0
+        }
+        return 0.0
+    }
+
+    func totalFinal() -> Double {
+        return totalConIgv() - descuentoPorCantidad() - descuentoTecsup()
+    }
 }
 
