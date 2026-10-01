@@ -17,8 +17,14 @@ class ViewControllerConfirmacion: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // mostrar los datos del cliente recibido
+        self.tfApellido.text = pCliente.Apellido
+        self.tfNombre.text = pCliente.Nombre
+        self.tfDni.text = pCliente.Dni
     }
 
+    // cerrar la ventana modal y regresar a la pantalla 1
     @IBAction func btnVolver(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
