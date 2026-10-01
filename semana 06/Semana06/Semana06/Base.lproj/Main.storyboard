@@ -11,12 +11,12 @@
         <!--View Controller2-->
         <scene sceneID="p3A-28-yvr">
             <objects>
-                <viewController id="T5z-RS-xGR" customClass="ViewController2" sceneMemberID="viewController">
+                <viewController id="T5z-RS-xGR" customClass="ViewController2" customModule="Semana06" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ref-fP-96B">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PANTALLA2 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fup-ll-C3b">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PANTALLA 02" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fup-ll-C3b">
                                 <rect key="frame" x="135" y="186" width="97" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -41,7 +41,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PANTALLA 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgp-5S-RA4">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PANTALLA 01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgp-5S-RA4">
                                 <rect key="frame" x="149" y="191" width="95" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -60,18 +60,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="GGn-5S-vCY">
-                        <barButtonItem key="leftBarButtonItem" title="pantalla 2" id="L14-GG-B3o">
+                        <barButtonItem key="rightBarButtonItem" title="A Pantalla 2" id="L14-GG-B3o">
                             <connections>
                                 <segue destination="T5z-RS-xGR" kind="show" id="Wqy-l7-oCf"/>
                             </connections>
                         </barButtonItem>
-                        <centerItemGroups>
-                            <barButtonItemGroup customizationDisposition="fixed" id="nPf-MU-Ck4">
-                                <barButtonItems>
-                                    <barButtonItem title="Item" id="dFy-b7-NwA"/>
-                                </barButtonItems>
-                            </barButtonItemGroup>
-                        </centerItemGroups>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
