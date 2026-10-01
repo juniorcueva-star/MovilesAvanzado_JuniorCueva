@@ -65,3 +65,17 @@ VentaModel se crea en "Nueva Venta" y se entrega a "Resultado" dentro de prepare
 - Separó el cálculo en una función `calcularVenta()` y la conversión en `leerNumero(_:)`, en vez de poner todo dentro de prepare(for:sender:).
 - No usó `guard let`; se quedó con `if` y el operador `??`, que es más parecido al patrón visto en clase.
 - Respetó las restricciones: no usó Combine, Codable ni persistencia.
+
+## Segunda iteración: mejora de diseño
+
+Prompt: "Mejora el diseño de la calculadora sin cambiar la lógica ni las restricciones."
+
+Cambios que hizo la IA:
+
+- Fondo gris agrupado y los campos dentro de una tarjeta blanca con esquinas redondeadas.
+- Placeholders de ejemplo en cada UITextField y botón Calcular redondeado.
+- En Resultado, la cuota mensual destacada en una tarjeta azul y el desglose en otra tarjeta con una línea antes del total.
+- Cabecera con el nombre del electrodoméstico y el resumen de la venta (unidades, meses e interés).
+- El teclado se oculta al tocar fuera de los campos.
+
+Se mantuvo lo pedido en el laboratorio: VentaModel con 6 Double, segue Show `showResultado`, prepare(for:sender:) y formato `S/. %.2f`.

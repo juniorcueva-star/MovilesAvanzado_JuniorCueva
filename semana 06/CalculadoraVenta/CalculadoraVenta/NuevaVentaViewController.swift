@@ -20,6 +20,12 @@ class NuevaVentaViewController: UIViewController {
         super.viewDidLoad()
     }
 
+    // al tocar fuera de los campos se oculta el teclado
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.view.endEditing(true)
+    }
+
     // convierte el texto de un campo a numero
     // si el campo esta vacio o no es un numero devuelve 0
     func leerNumero(_ campo: UITextField) -> Double {
@@ -54,6 +60,13 @@ class NuevaVentaViewController: UIViewController {
         if segue.identifier == "showResultado" {
             let oResultado = segue.destination as! ResultadoViewController
             oResultado.pVenta = calcularVenta()
+
+            // textos de cabecera: nombre del producto y resumen de la venta
+            let cantidad: Double = leerNumero(self.tfCantidad)
+            let meses: Double = leerNumero(self.tfMeses)
+            let tasa: Double = leerNumero(self.tfInteres)
+            oResultado.pElectrodomestico = self.tfElectrodomestico.text!
+            oResultado.pDetalle = String(format: "%.0f unidades  ·  %.0f meses  ·  %.1f %% mensual", cantidad, meses, tasa)
         }
     }
 }

@@ -9,242 +9,331 @@
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
-        <scene sceneID="q25-Jc-025">
+        <scene sceneID="d01-Jc-001">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Nav-Vc-001" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="q26-Jc-026">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="d02-Jc-002">
                         <rect key="frame" x="0.0" y="118" width="393" height="54"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Nva-Vc-001" kind="relationship" relationship="rootViewController" id="q27-Jc-027"/>
+                        <segue destination="Nva-Vc-001" kind="relationship" relationship="rootViewController" id="d03-Jc-003"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q28-Jc-028" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d04-Jc-004" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-900" y="0"/>
+            <point key="canvasLocation" x="-900" y="0.0"/>
         </scene>
         <!--Nueva Venta-->
-        <scene sceneID="q35-Jc-035">
+        <scene sceneID="d43-Jc-043">
             <objects>
                 <viewController id="Nva-Vc-001" customClass="NuevaVentaViewController" customModule="CalculadoraVenta" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="q36-Jc-036">
+                    <view key="view" contentMode="scaleToFill" id="d44-Jc-044">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Electrodoméstico:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q01-Jc-001">
-                                <rect key="frame" x="40" y="135" width="313" height="21"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q02-Jc-002">
-                                <rect key="frame" x="40" y="161" width="313" height="34"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Precio unitario:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q03-Jc-003">
-                                <rect key="frame" x="40" y="207" width="313" height="21"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q04-Jc-004">
-                                <rect key="frame" x="40" y="233" width="313" height="34"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cantidad:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q05-Jc-005">
-                                <rect key="frame" x="40" y="279" width="313" height="21"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q06-Jc-006">
-                                <rect key="frame" x="40" y="305" width="313" height="34"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Meses:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q07-Jc-007">
-                                <rect key="frame" x="40" y="351" width="313" height="21"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q08-Jc-008">
-                                <rect key="frame" x="40" y="377" width="313" height="34"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Interés mensual (%):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q09-Jc-009">
-                                <rect key="frame" x="40" y="423" width="313" height="21"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q10-Jc-010">
-                                <rect key="frame" x="40" y="449" width="313" height="34"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q12-Jc-012">
-                                <rect key="frame" x="40" y="510" width="313" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBlueColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Calcular">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <segue destination="Res-Vc-001" kind="show" identifier="showResultado" id="q11-Jc-011"/>
-                                </connections>
-                            </button>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Venta a plazos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d05-Jc-005">
+    <rect key="frame" x="24" y="128" width="345" height="30"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+    <nil key="textColor"/>
+    <nil key="highlightedColor"/>
+</label>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Ingresa los datos del electrodoméstico" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d06-Jc-006">
+    <rect key="frame" x="24" y="160" width="345" height="20"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+    <color key="textColor" systemColor="secondaryLabelColor"/>
+    <nil key="highlightedColor"/>
+</label>
+<view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d17-Jc-017">
+    <rect key="frame" x="16" y="196" width="361" height="390"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <subviews>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Electrodoméstico" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d07-Jc-007">
+    <rect key="frame" x="16" y="16" width="329" height="18"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+    <color key="textColor" systemColor="secondaryLabelColor"/>
+    <nil key="highlightedColor"/>
+</label>
+<textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ej. Refrigeradora" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="d08-Jc-008">
+    <rect key="frame" x="16" y="38" width="329" height="40"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+    <textInputTraits key="textInputTraits"/>
+</textField>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Precio unitario (S/.)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d09-Jc-009">
+    <rect key="frame" x="16" y="90" width="329" height="18"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+    <color key="textColor" systemColor="secondaryLabelColor"/>
+    <nil key="highlightedColor"/>
+</label>
+<textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ej. 1750.00" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="d10-Jc-010">
+    <rect key="frame" x="16" y="112" width="329" height="40"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+</textField>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cantidad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d11-Jc-011">
+    <rect key="frame" x="16" y="164" width="329" height="18"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+    <color key="textColor" systemColor="secondaryLabelColor"/>
+    <nil key="highlightedColor"/>
+</label>
+<textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ej. 2" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="d12-Jc-012">
+    <rect key="frame" x="16" y="186" width="329" height="40"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+</textField>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Número de meses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d13-Jc-013">
+    <rect key="frame" x="16" y="238" width="329" height="18"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+    <color key="textColor" systemColor="secondaryLabelColor"/>
+    <nil key="highlightedColor"/>
+</label>
+<textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ej. 12" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="d14-Jc-014">
+    <rect key="frame" x="16" y="260" width="329" height="40"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+</textField>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Interés mensual (%)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d15-Jc-015">
+    <rect key="frame" x="16" y="312" width="329" height="18"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+    <color key="textColor" systemColor="secondaryLabelColor"/>
+    <nil key="highlightedColor"/>
+</label>
+<textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ej. 1.5" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="d16-Jc-016">
+    <rect key="frame" x="16" y="334" width="329" height="40"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+</textField>
+    </subviews>
+    <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+    <userDefinedRuntimeAttributes>
+    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+        <integer key="value" value="16"/>
+    </userDefinedRuntimeAttribute>
+</userDefinedRuntimeAttributes>
+</view>
+<button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d18-Jc-018">
+    <rect key="frame" x="16" y="606" width="361" height="52"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <color key="backgroundColor" systemColor="systemBlueColor"/>
+    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+    <state key="normal" title="Calcular">
+        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+    </state>
+    <userDefinedRuntimeAttributes>
+    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+        <integer key="value" value="14"/>
+    </userDefinedRuntimeAttribute>
+</userDefinedRuntimeAttributes>
+    <connections>
+        <segue destination="Res-Vc-001" kind="show" identifier="showResultado" id="d19-Jc-019"/>
+    </connections>
+</button>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="q37-Jc-037"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="d45-Jc-045"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Nueva Venta" id="q29-Jc-029"/>
+                    <navigationItem key="navigationItem" title="Nueva Venta" id="d46-Jc-046"/>
                     <connections>
-                        <outlet property="tfElectrodomestico" destination="q02-Jc-002" id="q30-Jc-030"/>
-                        <outlet property="tfPrecio" destination="q04-Jc-004" id="q31-Jc-031"/>
-                        <outlet property="tfCantidad" destination="q06-Jc-006" id="q32-Jc-032"/>
-                        <outlet property="tfMeses" destination="q08-Jc-008" id="q33-Jc-033"/>
-                        <outlet property="tfInteres" destination="q10-Jc-010" id="q34-Jc-034"/>
+                        <outlet property="tfElectrodomestico" destination="d08-Jc-008" id="d38-Jc-038"/>
+                        <outlet property="tfPrecio" destination="d10-Jc-010" id="d39-Jc-039"/>
+                        <outlet property="tfCantidad" destination="d12-Jc-012" id="d40-Jc-040"/>
+                        <outlet property="tfMeses" destination="d14-Jc-014" id="d41-Jc-041"/>
+                        <outlet property="tfInteres" destination="d16-Jc-016" id="d42-Jc-042"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q38-Jc-038" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d47-Jc-047" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="0" y="0"/>
+            <point key="canvasLocation" x="0" y="0.0"/>
         </scene>
         <!--Resultado-->
-        <scene sceneID="q46-Jc-046">
+        <scene sceneID="d56-Jc-056">
             <objects>
                 <viewController id="Res-Vc-001" customClass="ResultadoViewController" customModule="CalculadoraVenta" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="q47-Jc-047">
+                    <view key="view" contentMode="scaleToFill" id="d57-Jc-057">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Subtotal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q13-Jc-013">
-                                <rect key="frame" x="40" y="150" width="150" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="S/. 0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q14-Jc-014">
-                                <rect key="frame" x="193" y="150" width="160" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="IGV (18%)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q15-Jc-015">
-                                <rect key="frame" x="40" y="190" width="150" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="S/. 0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q16-Jc-016">
-                                <rect key="frame" x="193" y="190" width="160" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Base" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q17-Jc-017">
-                                <rect key="frame" x="40" y="230" width="150" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="S/. 0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q18-Jc-018">
-                                <rect key="frame" x="193" y="230" width="160" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Intereses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q19-Jc-019">
-                                <rect key="frame" x="40" y="270" width="150" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="S/. 0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q20-Jc-020">
-                                <rect key="frame" x="193" y="270" width="160" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q21-Jc-021">
-                                <rect key="frame" x="40" y="320" width="150" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="S/. 0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q22-Jc-022">
-                                <rect key="frame" x="193" y="320" width="160" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cuota mensual" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q23-Jc-023">
-                                <rect key="frame" x="40" y="360" width="150" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" systemColor="systemBlueColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="S/. 0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q24-Jc-024">
-                                <rect key="frame" x="193" y="360" width="160" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" systemColor="systemBlueColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Electrodoméstico" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d20-Jc-020">
+    <rect key="frame" x="24" y="128" width="345" height="30"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+    <nil key="textColor"/>
+    <nil key="highlightedColor"/>
+</label>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Detalle de la venta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d21-Jc-021">
+    <rect key="frame" x="24" y="160" width="345" height="20"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+    <color key="textColor" systemColor="secondaryLabelColor"/>
+    <nil key="highlightedColor"/>
+</label>
+<view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d24-Jc-024">
+    <rect key="frame" x="16" y="196" width="361" height="108"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <subviews>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cuota mensual" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d22-Jc-022">
+    <rect key="frame" x="20" y="18" width="321" height="20"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+    <color key="textColor" white="1" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+    <nil key="highlightedColor"/>
+</label>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="S/. 0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="d23-Jc-023">
+    <rect key="frame" x="20" y="42" width="321" height="48"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="boldSystem" pointSize="38"/>
+    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+    <nil key="highlightedColor"/>
+</label>
+    </subviews>
+    <color key="backgroundColor" systemColor="systemBlueColor"/>
+    <userDefinedRuntimeAttributes>
+    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+        <integer key="value" value="16"/>
+    </userDefinedRuntimeAttribute>
+</userDefinedRuntimeAttributes>
+</view>
+<view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d36-Jc-036">
+    <rect key="frame" x="16" y="320" width="361" height="240"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <subviews>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Subtotal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d25-Jc-025">
+    <rect key="frame" x="20" y="20" width="150" height="21"/>
+    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+    <color key="textColor" systemColor="secondaryLabelColor"/>
+    <nil key="highlightedColor"/>
+</label>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="S/. 0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d26-Jc-026">
+    <rect key="frame" x="171" y="20" width="170" height="21"/>
+    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+    <nil key="textColor"/>
+    <nil key="highlightedColor"/>
+</label>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="IGV (18%)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d27-Jc-027">
+    <rect key="frame" x="20" y="60" width="150" height="21"/>
+    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+    <color key="textColor" systemColor="secondaryLabelColor"/>
+    <nil key="highlightedColor"/>
+</label>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="S/. 0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d28-Jc-028">
+    <rect key="frame" x="171" y="60" width="170" height="21"/>
+    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+    <nil key="textColor"/>
+    <nil key="highlightedColor"/>
+</label>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Base" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d29-Jc-029">
+    <rect key="frame" x="20" y="100" width="150" height="21"/>
+    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+    <color key="textColor" systemColor="secondaryLabelColor"/>
+    <nil key="highlightedColor"/>
+</label>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="S/. 0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d30-Jc-030">
+    <rect key="frame" x="171" y="100" width="170" height="21"/>
+    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+    <nil key="textColor"/>
+    <nil key="highlightedColor"/>
+</label>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Intereses" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d31-Jc-031">
+    <rect key="frame" x="20" y="140" width="150" height="21"/>
+    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+    <color key="textColor" systemColor="secondaryLabelColor"/>
+    <nil key="highlightedColor"/>
+</label>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="S/. 0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d32-Jc-032">
+    <rect key="frame" x="171" y="140" width="170" height="21"/>
+    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+    <nil key="textColor"/>
+    <nil key="highlightedColor"/>
+</label>
+<view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d33-Jc-033">
+    <rect key="frame" x="20" y="178" width="321" height="1"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <color key="backgroundColor" red="0.85" green="0.85" blue="0.87" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+</view>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total a pagar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d34-Jc-034">
+    <rect key="frame" x="20" y="196" width="150" height="24"/>
+    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+    <nil key="textColor"/>
+    <nil key="highlightedColor"/>
+</label>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="S/. 0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d35-Jc-035">
+    <rect key="frame" x="171" y="196" width="170" height="24"/>
+    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+    <nil key="textColor"/>
+    <nil key="highlightedColor"/>
+</label>
+    </subviews>
+    <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+    <userDefinedRuntimeAttributes>
+    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+        <integer key="value" value="16"/>
+    </userDefinedRuntimeAttribute>
+</userDefinedRuntimeAttributes>
+</view>
+<label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Precios en soles. El IGV es el 18% del subtotal." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d37-Jc-037">
+    <rect key="frame" x="24" y="572" width="345" height="18"/>
+    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+    <color key="textColor" systemColor="secondaryLabelColor"/>
+    <nil key="highlightedColor"/>
+</label>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="q48-Jc-048"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="d58-Jc-058"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Resultado" id="q39-Jc-039"/>
+                    <navigationItem key="navigationItem" title="Resultado" id="d59-Jc-059"/>
                     <connections>
-                        <outlet property="lblSubtotal" destination="q14-Jc-014" id="q40-Jc-040"/>
-                        <outlet property="lblIgv" destination="q16-Jc-016" id="q41-Jc-041"/>
-                        <outlet property="lblBase" destination="q18-Jc-018" id="q42-Jc-042"/>
-                        <outlet property="lblIntereses" destination="q20-Jc-020" id="q43-Jc-043"/>
-                        <outlet property="lblTotal" destination="q22-Jc-022" id="q44-Jc-044"/>
-                        <outlet property="lblCuota" destination="q24-Jc-024" id="q45-Jc-045"/>
+                        <outlet property="lblProducto" destination="d20-Jc-020" id="d48-Jc-048"/>
+                        <outlet property="lblDetalle" destination="d21-Jc-021" id="d49-Jc-049"/>
+                        <outlet property="lblCuota" destination="d23-Jc-023" id="d50-Jc-050"/>
+                        <outlet property="lblSubtotal" destination="d26-Jc-026" id="d51-Jc-051"/>
+                        <outlet property="lblIgv" destination="d28-Jc-028" id="d52-Jc-052"/>
+                        <outlet property="lblBase" destination="d30-Jc-030" id="d53-Jc-053"/>
+                        <outlet property="lblIntereses" destination="d32-Jc-032" id="d54-Jc-054"/>
+                        <outlet property="lblTotal" destination="d35-Jc-035" id="d55-Jc-055"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q49-Jc-049" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d60-Jc-060" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="800" y="0"/>
+            <point key="canvasLocation" x="800" y="0.0"/>
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemBackgroundColor">
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemGroupedBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
