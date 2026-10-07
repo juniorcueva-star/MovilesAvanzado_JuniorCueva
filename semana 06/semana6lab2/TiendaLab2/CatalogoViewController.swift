@@ -9,6 +9,12 @@ class CatalogoViewController: UIViewController {
         Producto(nombre: "Cocina", precio: 1200, stock: 4)
     ]
 
+    let carrito = CarritoModel()
+    @IBOutlet weak var verCarritoButton: UIButton!
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        verCarritoButton.setTitle("Ver carrito (\(carrito.cantidadTotal()))", for: .normal)
+    }
     @IBAction func productoTapped(_ sender: UIButton) {
         performSegue(withIdentifier: "verDetalle", sender: sender)
     }
@@ -17,6 +23,10 @@ class CatalogoViewController: UIViewController {
         if segue.identifier == "verDetalle", let boton = sender as? UIButton,
            let destino = segue.destination as? DetalleViewController {
             destino.producto = productos[boton.tag]
+            destino.carrito = carrito
+        } else if segue.identifier == "verCarrito",
+                  let destino = segue.destination as? CarritoViewController {
+            destino.carrito = carrito
         }
     }
 }
