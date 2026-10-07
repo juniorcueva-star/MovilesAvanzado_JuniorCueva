@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nav">
+    <device id="retina6_12" orientation="portrait" appearance="light" />
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504" />
+        <capability name="Safe area layout guides" minToolsVersion="9.0" />
+        <capability name="System colors in document resources" minToolsVersion="11.0" />
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0" />
+    </dependencies>
+    <scenes>
+        <scene sceneID="nav-scene">
+            <objects>
+                <navigationController id="nav" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nav-bar">
+                        <rect key="frame" x="0" y="62" width="393" height="44" />
+                        <autoresizingMask key="autoresizingMask" />
+                    </navigationBar>
+                    <connections>
+                        <segue destination="catalogo" kind="relationship" relationship="rootViewController" id="root" />
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nav-responder" sceneMemberID="firstResponder" />
+            </objects>
+            <point key="canvasLocation" x="-900" y="0" />
+        </scene>
+        <scene sceneID="catalogo-scene">
+            <objects>
+                <viewController id="catalogo" customClass="CatalogoViewController" customModule="TiendaLab2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="catalogo-view">
+                        <rect key="frame" x="0" y="0" width="393" height="852" />
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" />
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="catalogo-stack">
+                                <rect key="frame" x="24" y="200" width="345" height="450" />
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Tienda Tecsup" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="cat-title">
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="28" />
+                                        <nil key="textColor" />
+                                        <nil key="highlightedColor" />
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Elige un producto para ver su detalle" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="cat-sub">
+                                        <fontDescription key="fontDescription" type="system" pointSize="16" />
+                                        <nil key="textColor" />
+                                        <nil key="highlightedColor" />
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" buttonType="system" tag="0" enabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="producto-0">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="producto-0-height" />
+                                        </constraints>
+                                        <state key="normal" title="Refrigeradora · S/ 2000.00" />
+                                        <connections>
+                                            <action selector="productoTapped:" destination="catalogo" eventType="touchUpInside" id="producto-0-action" />
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" buttonType="system" tag="1" enabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="producto-1">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="producto-1-height" />
+                                        </constraints>
+                                        <state key="normal" title="Licuadora · S/ 250.00" />
+                                        <connections>
+                                            <action selector="productoTapped:" destination="catalogo" eventType="touchUpInside" id="producto-1-action" />
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" buttonType="system" tag="2" enabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="producto-2">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="producto-2-height" />
+                                        </constraints>
+                                        <state key="normal" title="Laptop · S/ 3500.00" />
+                                        <connections>
+                                            <action selector="productoTapped:" destination="catalogo" eventType="touchUpInside" id="producto-2-action" />
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" buttonType="system" tag="3" enabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="producto-3">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="producto-3-height" />
+                                        </constraints>
+                                        <state key="normal" title="Cocina · S/ 1200.00" />
+                                        <connections>
+                                            <action selector="productoTapped:" destination="catalogo" eventType="touchUpInside" id="producto-3-action" />
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" buttonType="system" tag="0" enabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="carrito-button">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="carrito-button-height" />
+                                        </constraints>
+                                        <state key="normal" title="Ver carrito (0)" />
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="catalogo-safe" />
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" />
+                        <constraints>
+                            <constraint firstItem="catalogo-stack" firstAttribute="top" secondItem="catalogo-safe" secondAttribute="top" constant="32" id="catalogo-top" />
+                            <constraint firstItem="catalogo-stack" firstAttribute="leading" secondItem="catalogo-safe" secondAttribute="leading" constant="24" id="catalogo-left" />
+                            <constraint firstItem="catalogo-safe" firstAttribute="trailing" secondItem="catalogo-stack" secondAttribute="trailing" constant="24" id="catalogo-right" />
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Catálogo" id="catalogo-nav" />
+                    <connections>
+                        <segue destination="detalle" kind="show" identifier="verDetalle" id="ver-detalle" />
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="catalogo-responder" sceneMemberID="firstResponder" />
+            </objects>
+            <point key="canvasLocation" x="0" y="0" />
+        </scene>
+        <scene sceneID="detalle-scene">
+            <objects>
+                <viewController id="detalle" customClass="DetalleViewController" customModule="TiendaLab2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="detalle-view">
+                        <rect key="frame" x="0" y="0" width="393" height="852" />
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" />
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="detalle-stack">
+                                <rect key="frame" x="24" y="200" width="345" height="450" />
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Refrigeradora" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="nombre">
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="28" />
+                                        <nil key="textColor" />
+                                        <nil key="highlightedColor" />
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Precio: S/ 2000.00" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="precio">
+                                        <fontDescription key="fontDescription" type="system" pointSize="20" />
+                                        <nil key="textColor" />
+                                        <nil key="highlightedColor" />
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Stock disponible: 5" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="stock">
+                                        <fontDescription key="fontDescription" type="system" pointSize="17" />
+                                        <nil key="textColor" />
+                                        <nil key="highlightedColor" />
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Cantidad: 1" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="cantidad">
+                                        <fontDescription key="fontDescription" type="system" pointSize="17" />
+                                        <nil key="textColor" />
+                                        <nil key="highlightedColor" />
+                                    </label>
+                                    <stepper opaque="NO" contentMode="scaleToFill" value="1" minimumValue="1" maximumValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="stepper">
+                                        <connections>
+                                            <action selector="cantidadChanged:" destination="detalle" eventType="valueChanged" id="stepper-action" />
+                                        </connections>
+                                    </stepper>
+                                    <button opaque="NO" contentMode="scaleToFill" buttonType="system" tag="0" enabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agregar">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="agregar-height" />
+                                        </constraints>
+                                        <state key="normal" title="Agregar al carrito" />
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="detalle-safe" />
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" />
+                        <constraints>
+                            <constraint firstItem="detalle-stack" firstAttribute="top" secondItem="detalle-safe" secondAttribute="top" constant="32" id="detalle-top" />
+                            <constraint firstItem="detalle-stack" firstAttribute="leading" secondItem="detalle-safe" secondAttribute="leading" constant="24" id="detalle-left" />
+                            <constraint firstItem="detalle-safe" firstAttribute="trailing" secondItem="detalle-stack" secondAttribute="trailing" constant="24" id="detalle-right" />
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Detalle" id="detalle-nav" />
+                    <connections>
+                        <outlet property="nombreLabel" destination="nombre" id="outlet-nombre" />
+                        <outlet property="precioLabel" destination="precio" id="outlet-precio" />
+                        <outlet property="stockLabel" destination="stock" id="outlet-stock" />
+                        <outlet property="cantidadLabel" destination="cantidad" id="outlet-cantidad" />
+                        <outlet property="cantidadStepper" destination="stepper" id="outlet-stepper" />
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="detalle-responder" sceneMemberID="firstResponder" />
+            </objects>
+            <point key="canvasLocation" x="900" y="0" />
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace" />
+        </systemColor>
+    </resources>
+</document>
