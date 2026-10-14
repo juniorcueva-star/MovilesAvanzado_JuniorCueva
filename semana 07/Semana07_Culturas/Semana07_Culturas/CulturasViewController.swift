@@ -2,7 +2,7 @@ import UIKit
 
 final class CulturasViewController: UIViewController {
     private let culturas = Cultura.ejemplos
-    private let tabla = UITableView(frame: .zero, style: .insetGrouped)
+    @IBOutlet private weak var tabla: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -10,21 +10,27 @@ final class CulturasViewController: UIViewController {
         view.backgroundColor = .systemGroupedBackground
         navigationController?.navigationBar.prefersLargeTitles = true
 
-        tabla.translatesAutoresizingMaskIntoConstraints = false
         tabla.backgroundColor = .clear
         tabla.separatorStyle = .none
         tabla.rowHeight = UITableView.automaticDimension
         tabla.estimatedRowHeight = 124
         tabla.dataSource = self
+        tabla.delegate = self
         tabla.register(CulturaTableViewCell.self, forCellReuseIdentifier: CulturaTableViewCell.reuseIdentifier)
-        view.addSubview(tabla)
+    }
 
-        NSLayoutConstraint.activate([
-            tabla.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tabla.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tabla.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tabla.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "mostrarDetalle",
+              let detalle = segue.destination as? DetalleCulturaViewController,
+              let cultura = sender as? Cultura else { return }
+        detalle.cultura = cultura
+    }
+}
+
+extension CulturasViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "mostrarDetalle", sender: culturas[indexPath.row])
     }
 }
 

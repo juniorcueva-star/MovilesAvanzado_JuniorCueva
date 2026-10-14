@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NAV-VC-001">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="NAV-SCENE">
+            <objects>
+                <navigationController id="NAV-VC-001" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NAV-BAR-001">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="LIST-VC-001" kind="relationship" relationship="rootViewController" id="ROOT-SEGUE-001"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NAV-FIRST" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-380" y="80"/>
+        </scene>
+        <!--Lista de Culturas-->
+        <scene sceneID="LIST-SCENE">
+            <objects>
+                <viewController id="LIST-VC-001" customClass="CulturasViewController" customModule="Semana07_Culturas" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LIST-VIEW-001">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <viewLayoutGuide key="safeArea" id="LIST-SAFE-001"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" translatesAutoresizingMaskIntoConstraints="NO" id="LIST-TABLE-001">
+                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
+                                <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="LIST-TABLE-001" firstAttribute="top" secondItem="LIST-SAFE-001" secondAttribute="top" id="LIST-TOP-001"/>
+                            <constraint firstItem="LIST-TABLE-001" firstAttribute="leading" secondItem="LIST-VIEW-001" secondAttribute="leading" id="LIST-LEAD-001"/>
+                            <constraint firstItem="LIST-VIEW-001" firstAttribute="trailing" secondItem="LIST-TABLE-001" secondAttribute="trailing" id="LIST-TRAIL-001"/>
+                            <constraint firstItem="LIST-VIEW-001" firstAttribute="bottom" secondItem="LIST-TABLE-001" secondAttribute="bottom" id="LIST-BOTTOM-001"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Culturas peruanas" id="LIST-NAV-001"/>
+                    <connections>
+                        <outlet property="tabla" destination="LIST-TABLE-001" id="LIST-OUTLET-001"/>
+                        <segue destination="DETAIL-VC-001" kind="show" identifier="mostrarDetalle" id="SHOW-SEGUE-001"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LIST-FIRST" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="120" y="80"/>
+        </scene>
+        <!--Detalle de Cultura-->
+        <scene sceneID="DETAIL-SCENE">
+            <objects>
+                <viewController id="DETAIL-VC-001" customClass="DetalleCulturaViewController" customModule="Semana07_Culturas" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DETAIL-VIEW-001">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <viewLayoutGuide key="safeArea" id="DETAIL-SAFE-001"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" clipsSubviews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DETAIL-IMAGE-001">
+                                <rect key="frame" x="20" y="119" width="353" height="230"/>
+                                <image name="chavin" width="1200" height="900"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Nombre de la cultura" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="DETAIL-NAME-001">
+                                <rect key="frame" x="20" y="369" width="353" height="40"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Región del Perú" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="DETAIL-REGION-001">
+                                <rect key="frame" x="20" y="421" width="353" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Descripción breve de la cultura seleccionada. Aquí se muestra la información que corresponde a la fila elegida." numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="DETAIL-DESC-001">
+                                <rect key="frame" x="20" y="469" width="353" height="100"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Crédito de la imagen" numberOfLines="0" translatesAutoresizingMaskIntoConstraints="NO" id="DETAIL-CREDIT-001">
+                                <rect key="frame" x="20" y="591" width="353" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" translatesAutoresizingMaskIntoConstraints="NO" id="DETAIL-BUTTON-001">
+                                <rect key="frame" x="20" y="643" width="353" height="34"/>
+                                <state key="normal" title="Ver imagen y licencia"/>
+                                <connections>
+                                    <action selector="abrirFuente:" destination="DETAIL-VC-001" eventType="touchUpInside" id="DETAIL-ACTION-001"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="DETAIL-IMAGE-001" firstAttribute="top" secondItem="DETAIL-SAFE-001" secondAttribute="top" constant="16" id="D-IMG-TOP"/>
+                            <constraint firstItem="DETAIL-IMAGE-001" firstAttribute="leading" secondItem="DETAIL-SAFE-001" secondAttribute="leading" constant="20" id="D-IMG-LEAD"/>
+                            <constraint firstItem="DETAIL-SAFE-001" firstAttribute="trailing" secondItem="DETAIL-IMAGE-001" secondAttribute="trailing" constant="20" id="D-IMG-TRAIL"/>
+                            <constraint firstItem="DETAIL-IMAGE-001" firstAttribute="height" constant="230" id="D-IMG-HEIGHT"/>
+                            <constraint firstItem="DETAIL-NAME-001" firstAttribute="top" secondItem="DETAIL-IMAGE-001" secondAttribute="bottom" constant="20" id="D-NAME-TOP"/>
+                            <constraint firstItem="DETAIL-REGION-001" firstAttribute="top" secondItem="DETAIL-NAME-001" secondAttribute="bottom" constant="12" id="D-REGION-TOP"/>
+                            <constraint firstItem="DETAIL-DESC-001" firstAttribute="top" secondItem="DETAIL-REGION-001" secondAttribute="bottom" constant="24" id="D-DESC-TOP"/>
+                            <constraint firstItem="DETAIL-CREDIT-001" firstAttribute="top" secondItem="DETAIL-DESC-001" secondAttribute="bottom" constant="22" id="D-CREDIT-TOP"/>
+                            <constraint firstItem="DETAIL-BUTTON-001" firstAttribute="top" secondItem="DETAIL-CREDIT-001" secondAttribute="bottom" constant="12" id="D-BUTTON-TOP"/>
+                            <constraint firstItem="DETAIL-NAME-001" firstAttribute="leading" secondItem="DETAIL-SAFE-001" secondAttribute="leading" constant="20" id="D-NAME-LEAD"/>
+                            <constraint firstItem="DETAIL-REGION-001" firstAttribute="leading" secondItem="DETAIL-SAFE-001" secondAttribute="leading" constant="20" id="D-REGION-LEAD"/>
+                            <constraint firstItem="DETAIL-DESC-001" firstAttribute="leading" secondItem="DETAIL-SAFE-001" secondAttribute="leading" constant="20" id="D-DESC-LEAD"/>
+                            <constraint firstItem="DETAIL-CREDIT-001" firstAttribute="leading" secondItem="DETAIL-SAFE-001" secondAttribute="leading" constant="20" id="D-CREDIT-LEAD"/>
+                            <constraint firstItem="DETAIL-BUTTON-001" firstAttribute="leading" secondItem="DETAIL-SAFE-001" secondAttribute="leading" constant="20" id="D-BUTTON-LEAD"/>
+                            <constraint firstItem="DETAIL-SAFE-001" firstAttribute="trailing" secondItem="DETAIL-NAME-001" secondAttribute="trailing" constant="20" id="D-NAME-TRAIL"/>
+                            <constraint firstItem="DETAIL-SAFE-001" firstAttribute="trailing" secondItem="DETAIL-REGION-001" secondAttribute="trailing" constant="20" id="D-REGION-TRAIL"/>
+                            <constraint firstItem="DETAIL-SAFE-001" firstAttribute="trailing" secondItem="DETAIL-DESC-001" secondAttribute="trailing" constant="20" id="D-DESC-TRAIL"/>
+                            <constraint firstItem="DETAIL-SAFE-001" firstAttribute="trailing" secondItem="DETAIL-CREDIT-001" secondAttribute="trailing" constant="20" id="D-CREDIT-TRAIL"/>
+                            <constraint firstItem="DETAIL-SAFE-001" firstAttribute="trailing" secondItem="DETAIL-BUTTON-001" secondAttribute="trailing" constant="20" id="D-BUTTON-TRAIL"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Detalle" id="DETAIL-NAV-001"/>
+                    <connections>
+                        <outlet property="foto" destination="DETAIL-IMAGE-001" id="D-OUT-IMG"/>
+                        <outlet property="nombre" destination="DETAIL-NAME-001" id="D-OUT-NAME"/>
+                        <outlet property="region" destination="DETAIL-REGION-001" id="D-OUT-REGION"/>
+                        <outlet property="descripcion" destination="DETAIL-DESC-001" id="D-OUT-DESC"/>
+                        <outlet property="credito" destination="DETAIL-CREDIT-001" id="D-OUT-CREDIT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DETAIL-FIRST" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="620" y="80"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="chavin" width="1200" height="900"/>
+        <systemColor name="secondaryLabelColor">
+            <color white="0.23529411764705882" alpha="0.6" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGroupedBackgroundColor">
+            <color white="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
