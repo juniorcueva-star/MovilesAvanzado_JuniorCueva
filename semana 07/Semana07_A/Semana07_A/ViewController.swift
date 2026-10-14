@@ -17,7 +17,9 @@ class ViewController: UIViewController,
         let cell = tableView.dequeueReusableCell(withIdentifier: "celda")!
         cell.textLabel?.text = listaProfesores[indexPath.row].nombre
         cell.detailTextLabel?.text = listaProfesores[indexPath.row].cargo
-        cell.imageView?.image = listaProfesores[indexPath.row].foto
+        if let foto = listaProfesores[indexPath.row].foto {
+            cell.imageView?.image = avatarCuadrado(foto)
+        }
         return cell
     }
     
@@ -38,5 +40,21 @@ class ViewController: UIViewController,
         Profesor(nombre: "junior cueva", cargo: "Docente de Redes TC", foto: UIImage(named: "avatar7"))
     ]
 
+    
+    private func avatarCuadrado(_ imagen: UIImage) -> UIImage {
+        let lado: CGFloat = 56
+        let escala = max(lado / imagen.size.width, lado / imagen.size.height)
+        let ancho = imagen.size.width * escala
+        let alto = imagen.size.height * escala
+
+        return UIGraphicsImageRenderer(size: CGSize(width: lado, height: lado)).image { _ in
+            imagen.draw(in: CGRect(
+                x: (lado - ancho) / 2,
+                y: (lado - alto) / 2,
+                width: ancho,
+                height: alto
+            ))
+        }
+    }
 }
 
