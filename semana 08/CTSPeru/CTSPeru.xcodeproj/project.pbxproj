@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0638B246501E608D3E73119F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1831F182C0E2315F04559524 /* ContentView.swift */; };
 		285ACA7B195BDE9CC28AEF7F /* CTSPeruTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996E1C3557596B9FFC048AF /* CTSPeruTests.swift */; };
+		AD8A92B11C6E14BEDA6D11AF /* CTSCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82E4D52755690EE417560D62 /* CTSCalculator.swift */; };
 		D32501906172CE1E0DD00F2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17D04010B88E77B0091AB381 /* Assets.xcassets */; };
 		EBE3F90B5F5D1FAF988B34A5 /* CTSPeruApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E05EE8D1C715D831724711 /* CTSPeruApp.swift */; };
 /* End PBXBuildFile section */
@@ -27,6 +28,7 @@
 		17D04010B88E77B0091AB381 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1831F182C0E2315F04559524 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5A6711582AC222B06A65F44C /* CTSPeruTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = CTSPeruTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		82E4D52755690EE417560D62 /* CTSCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTSCalculator.swift; sourceTree = "<group>"; };
 		C996E1C3557596B9FFC048AF /* CTSPeruTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTSPeruTests.swift; sourceTree = "<group>"; };
 		CF48683304388F2493186F4F /* CTSPeru.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = CTSPeru.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9E05EE8D1C715D831724711 /* CTSPeruApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTSPeruApp.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 			children = (
 				17D04010B88E77B0091AB381 /* Assets.xcassets */,
 				1831F182C0E2315F04559524 /* ContentView.swift */,
+				82E4D52755690EE417560D62 /* CTSCalculator.swift */,
 				F9E05EE8D1C715D831724711 /* CTSPeruApp.swift */,
 			);
 			path = CTSPeru;
@@ -163,6 +166,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD8A92B11C6E14BEDA6D11AF /* CTSCalculator.swift in Sources */,
 				EBE3F90B5F5D1FAF988B34A5 /* CTSPeruApp.swift in Sources */,
 				0638B246501E608D3E73119F /* ContentView.swift in Sources */,
 			);
