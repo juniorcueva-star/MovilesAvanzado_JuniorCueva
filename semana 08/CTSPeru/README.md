@@ -4,8 +4,12 @@
 
 - `CTSPeru.xcodeproj`: aplicación iPhone desarrollada en SwiftUI.
 - `CTS_Peru_Calculo_y_Vacaciones.xlsx`: cálculo explicado y comparación de vacaciones gozadas y no gozadas.
+- [`campos.md`](campos.md): explicación de cada campo y del resultado.
+- [`requeriemientos.md`](requeriemientos.md): funciones y alcance de la aplicación.
 
 Abre `CTSPeru.xcodeproj` en Xcode, selecciona el esquema **CTSPeru** y ejecuta en un simulador o iPhone. El proyecto fue generado con XcodeGen; `project.yml` permite regenerarlo si se agregan archivos Swift.
+
+Ingresa los datos y pulsa **Calcular CTS**. El resultado se muestra en una sección blanca; al cambiar un dato, pulsa el botón de nuevo para obtener el cálculo actualizado.
 
 ## Qué calcula
 
