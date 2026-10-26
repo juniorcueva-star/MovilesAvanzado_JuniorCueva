@@ -27,3 +27,14 @@ targets:
     settings:
       base:
         GENERATE_INFOPLIST_FILE: YES
+schemes:
+  CTSPeru:
+    shared: true
+    build:
+      targets:
+        CTSPeru: all
+    run:
+      config: Debug
+    test:
+      targets:
+        - CTSPeruTests
