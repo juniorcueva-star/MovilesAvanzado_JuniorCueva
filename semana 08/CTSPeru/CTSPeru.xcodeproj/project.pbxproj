@@ -1,0 +1,400 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0638B246501E608D3E73119F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1831F182C0E2315F04559524 /* ContentView.swift */; };
+		285ACA7B195BDE9CC28AEF7F /* CTSPeruTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996E1C3557596B9FFC048AF /* CTSPeruTests.swift */; };
+		D32501906172CE1E0DD00F2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17D04010B88E77B0091AB381 /* Assets.xcassets */; };
+		EBE3F90B5F5D1FAF988B34A5 /* CTSPeruApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E05EE8D1C715D831724711 /* CTSPeruApp.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9954F8C082BB97C67474AA8A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E419C5F954C9C56D0590506B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A3B65E7A194EFE7640207A2C;
+			remoteInfo = CTSPeru;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		17D04010B88E77B0091AB381 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1831F182C0E2315F04559524 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5A6711582AC222B06A65F44C /* CTSPeruTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = CTSPeruTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C996E1C3557596B9FFC048AF /* CTSPeruTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTSPeruTests.swift; sourceTree = "<group>"; };
+		CF48683304388F2493186F4F /* CTSPeru.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = CTSPeru.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9E05EE8D1C715D831724711 /* CTSPeruApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTSPeruApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		775C2FF5572F11AC49506C37 /* CTSPeruTests */ = {
+			isa = PBXGroup;
+			children = (
+				C996E1C3557596B9FFC048AF /* CTSPeruTests.swift */,
+			);
+			path = CTSPeruTests;
+			sourceTree = "<group>";
+		};
+		886313D7B692793E5C042A6B = {
+			isa = PBXGroup;
+			children = (
+				BF851E0C99F03A48D271AA92 /* CTSPeru */,
+				775C2FF5572F11AC49506C37 /* CTSPeruTests */,
+				F1410125190A411D65B81835 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BF851E0C99F03A48D271AA92 /* CTSPeru */ = {
+			isa = PBXGroup;
+			children = (
+				17D04010B88E77B0091AB381 /* Assets.xcassets */,
+				1831F182C0E2315F04559524 /* ContentView.swift */,
+				F9E05EE8D1C715D831724711 /* CTSPeruApp.swift */,
+			);
+			path = CTSPeru;
+			sourceTree = "<group>";
+		};
+		F1410125190A411D65B81835 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CF48683304388F2493186F4F /* CTSPeru.app */,
+				5A6711582AC222B06A65F44C /* CTSPeruTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A3B65E7A194EFE7640207A2C /* CTSPeru */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B46129021871B3CCA1935D06 /* Build configuration list for PBXNativeTarget "CTSPeru" */;
+			buildPhases = (
+				9B44EE87F19E90DE3AF3342F /* Sources */,
+				2134CD0EA5ACA0E5ABB576F3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CTSPeru;
+			packageProductDependencies = (
+			);
+			productName = CTSPeru;
+			productReference = CF48683304388F2493186F4F /* CTSPeru.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C6E6A47BBC373D74134DA91F /* CTSPeruTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 777AEE13776647595E5F5AD9 /* Build configuration list for PBXNativeTarget "CTSPeruTests" */;
+			buildPhases = (
+				79A1CC6E599860B77988F162 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F992939421C7C7410699E4AF /* PBXTargetDependency */,
+			);
+			name = CTSPeruTests;
+			packageProductDependencies = (
+			);
+			productName = CTSPeruTests;
+			productReference = 5A6711582AC222B06A65F44C /* CTSPeruTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E419C5F954C9C56D0590506B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = E5F9CA59F25DF40570137615 /* Build configuration list for PBXProject "CTSPeru" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 886313D7B692793E5C042A6B;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = F1410125190A411D65B81835 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A3B65E7A194EFE7640207A2C /* CTSPeru */,
+				C6E6A47BBC373D74134DA91F /* CTSPeruTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2134CD0EA5ACA0E5ABB576F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D32501906172CE1E0DD00F2A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		79A1CC6E599860B77988F162 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				285ACA7B195BDE9CC28AEF7F /* CTSPeruTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B44EE87F19E90DE3AF3342F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBE3F90B5F5D1FAF988B34A5 /* CTSPeruApp.swift in Sources */,
+				0638B246501E608D3E73119F /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F992939421C7C7410699E4AF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A3B65E7A194EFE7640207A2C /* CTSPeru */;
+			targetProxy = 9954F8C082BB97C67474AA8A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0597691AE8BEFFD4442E5897 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = pe.edu.tecsup.juniorcueva.CTSPeruTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CTSPeru.app/CTSPeru";
+			};
+			name = Debug;
+		};
+		37B4DD4A483C34A08795D12D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = pe.edu.tecsup.juniorcueva.CTSPeru;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		64CACCF1C859A6A43E703C96 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = pe.edu.tecsup.juniorcueva.CTSPeruTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CTSPeru.app/CTSPeru";
+			};
+			name = Release;
+		};
+		6CBE6CBF5A2C7F5C45546F69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		8BC2401FFA96B610039A716A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = pe.edu.tecsup.juniorcueva.CTSPeru;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		97AD38E68E06D1368CC5B846 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		777AEE13776647595E5F5AD9 /* Build configuration list for PBXNativeTarget "CTSPeruTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0597691AE8BEFFD4442E5897 /* Debug */,
+				64CACCF1C859A6A43E703C96 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B46129021871B3CCA1935D06 /* Build configuration list for PBXNativeTarget "CTSPeru" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37B4DD4A483C34A08795D12D /* Debug */,
+				8BC2401FFA96B610039A716A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E5F9CA59F25DF40570137615 /* Build configuration list for PBXProject "CTSPeru" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6CBE6CBF5A2C7F5C45546F69 /* Debug */,
+				97AD38E68E06D1368CC5B846 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E419C5F954C9C56D0590506B /* Project object */;
+}

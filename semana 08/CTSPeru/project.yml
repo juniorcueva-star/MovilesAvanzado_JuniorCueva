@@ -1,0 +1,29 @@
+name: CTSPeru
+options:
+  bundleIdPrefix: pe.edu.tecsup.juniorcueva
+settings:
+  base:
+    SWIFT_VERSION: 5.0
+    IPHONEOS_DEPLOYMENT_TARGET: 17.0
+targets:
+  CTSPeru:
+    type: application
+    platform: iOS
+    sources:
+      - path: CTSPeru
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: pe.edu.tecsup.juniorcueva.CTSPeru
+        GENERATE_INFOPLIST_FILE: YES
+        TARGETED_DEVICE_FAMILY: 1
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+  CTSPeruTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: CTSPeruTests
+    dependencies:
+      - target: CTSPeru
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
