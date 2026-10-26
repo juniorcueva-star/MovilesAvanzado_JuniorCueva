@@ -16,43 +16,32 @@ struct ContentView: View {
     @State private var acquiredVacationDays = 30
     @State private var tookVacation = false
     @State private var takenVacationDays = 15
+    @State private var displayedResult: CTSResult?
+    @State private var validationMessage: String?
 
-    private var result: CTSResult? {
-        guard let salary = parseAmount(salaryText),
-              let gratification = parseAmount(gratificationText) else { return nil }
-        return try? CTSCalculator.calculate(
-            CTSInput(
-                monthlySalary: salary,
-                semesterGratification: gratification,
-                fullMonths: fullMonths,
-                additionalDays: additionalDays,
-                acquiredVacationDays: acquiredVacationDays,
-                takenVacationDays: tookVacation ? takenVacationDays : 0
-            )
-        )
+    private var inputSignature: String {
+        [salaryText, gratificationText, String(fullMonths), String(additionalDays),
+         String(acquiredVacationDays), String(tookVacation), String(takenVacationDays)]
+            .joined(separator: "|")
     }
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 header
-                if let result {
-                    summary(result)
-                } else {
-                    Text("Revisa los importes y el periodo ingresado.")
-                        .font(.subheadline.weight(.medium))
-                        .foregroundStyle(.red)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(16)
-                        .background(.white, in: RoundedRectangle(cornerRadius: 16))
-                }
                 dataSection
                 timeSection
                 vacationSection
-                if let result {
+                calculateButton
+                if let validationMessage {
+                    Text(validationMessage)
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundStyle(.red)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                if let result = displayedResult {
                     detailSection(result)
                 }
-                legalNote
             }
             .padding(.horizontal, 18)
             .padding(.top, 18)
@@ -61,6 +50,10 @@ struct ContentView: View {
         .background(CTSTheme.background.ignoresSafeArea())
         .scrollDismissesKeyboard(.interactively)
         .preferredColorScheme(.light)
+        .onChange(of: inputSignature) { _, _ in
+            displayedResult = nil
+            validationMessage = nil
+        }
     }
 
     private var header: some View {
@@ -81,44 +74,6 @@ struct ContentView: View {
             Spacer(minLength: 0)
         }
         .accessibilityElement(children: .combine)
-    }
-
-    private func summary(_ result: CTSResult) -> some View {
-        VStack(alignment: .leading, spacing: 13) {
-            Text("CTS ESTIMADA DEL SEMESTRE")
-                .font(.system(size: 11, weight: .bold))
-                .tracking(1.1)
-                .foregroundStyle(.white.opacity(0.78))
-            Text(soles(result.totalCTS))
-                .font(.system(size: 34, weight: .bold, design: .rounded))
-                .minimumScaleFactor(0.8)
-                .lineLimit(1)
-                .foregroundStyle(.white)
-            Rectangle()
-                .fill(.white.opacity(0.22))
-                .frame(height: 1)
-            HStack(spacing: 14) {
-                metric("Base computable", soles(result.computablePay))
-                Spacer(minLength: 0)
-                metric("Vacaciones pendientes", "\(result.remainingVacationDays) días")
-            }
-        }
-        .padding(20)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(CTSTheme.teal, in: RoundedRectangle(cornerRadius: 20))
-    }
-
-    private func metric(_ title: String, _ value: String) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(title)
-                .font(.system(size: 11))
-                .foregroundStyle(.white.opacity(0.75))
-            Text(value)
-                .font(.system(size: 14, weight: .semibold))
-                .foregroundStyle(.white)
-                .lineLimit(1)
-                .minimumScaleFactor(0.85)
-        }
     }
 
     private var dataSection: some View {
@@ -169,28 +124,66 @@ struct ContentView: View {
     }
 
     private func detailSection(_ result: CTSResult) -> some View {
-        section("04", "Detalle del cálculo") {
+        section("04", "Resultado") {
             detailRow("Sueldo + 1/6 de gratificación", soles(result.computablePay))
             Divider()
             detailRow("CTS por meses", soles(result.monthlyPortion))
             Divider()
             detailRow("CTS por días", soles(result.dailyPortion))
+            Divider()
+            HStack {
+                Text("CTS estimada")
+                Spacer()
+                Text(soles(result.totalCTS))
+                    .font(.system(size: 21, weight: .bold, design: .rounded))
+            }
+            .foregroundStyle(CTSTheme.ink)
+            Divider()
+            detailRow("Vacaciones pendientes", "\(result.remainingVacationDays) días")
         }
     }
 
-    private var legalNote: some View {
-        VStack(alignment: .leading, spacing: 7) {
-            Text("Fórmula")
-                .font(.system(size: 13, weight: .semibold))
-                .foregroundStyle(CTSTheme.ink)
-            Text("(Sueldo + gratificación ÷ 6) × (meses ÷ 12 + días ÷ 360)")
-                .font(.system(size: 12))
-            Text("30 días calendario de vacaciones por año completo, sujeto al récord. D. S. 001-97-TR y D. Leg. 713. Estimación académica para remuneración fija.")
-                .font(.system(size: 11))
+    private var calculateButton: some View {
+        Button(action: calculate) {
+            HStack {
+                Image(systemName: "equal.circle.fill")
+                Text("Calcular CTS")
+                Spacer()
+                Image(systemName: "arrow.right")
+            }
+            .font(.system(size: 16, weight: .semibold))
+            .foregroundStyle(.white)
+            .padding(17)
+            .frame(maxWidth: .infinity)
+            .background(CTSTheme.orange, in: RoundedRectangle(cornerRadius: 16))
         }
-        .foregroundStyle(CTSTheme.muted)
-        .fixedSize(horizontal: false, vertical: true)
-        .padding(.horizontal, 3)
+        .buttonStyle(.plain)
+    }
+
+    private func calculate() {
+        guard let salary = parseAmount(salaryText),
+              let gratification = parseAmount(gratificationText) else {
+            displayedResult = nil
+            validationMessage = "Ingresa sueldo y gratificación válidos."
+            return
+        }
+
+        do {
+            displayedResult = try CTSCalculator.calculate(
+                CTSInput(
+                    monthlySalary: salary,
+                    semesterGratification: gratification,
+                    fullMonths: fullMonths,
+                    additionalDays: additionalDays,
+                    acquiredVacationDays: acquiredVacationDays,
+                    takenVacationDays: tookVacation ? takenVacationDays : 0
+                )
+            )
+            validationMessage = nil
+        } catch {
+            displayedResult = nil
+            validationMessage = error.localizedDescription
+        }
     }
 
     private func section<Content: View>(
