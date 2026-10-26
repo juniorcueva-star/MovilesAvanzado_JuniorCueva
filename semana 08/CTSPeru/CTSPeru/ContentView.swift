@@ -197,3 +197,9 @@ private extension View {
             .shadow(color: .black.opacity(0.04), radius: 8, y: 3)
     }
 }
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
