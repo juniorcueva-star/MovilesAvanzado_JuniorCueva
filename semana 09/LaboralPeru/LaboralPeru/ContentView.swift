@@ -301,6 +301,11 @@ enum Calculos {
                         "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
     static let afps = ["Habitat", "Integra", "Prima", "Profuturo"]
 
+    // CTS: gratificacion recibe el monto completo; se divide entre seis una sola vez.
+    // Los guard validan los importes, el tiempo y la jornada antes de calcular.
+    // Ejemplo: sueldo 3000 y gratificacion 3000 dan una base de 3500.
+    // Para seis meses y cero días: 3500 * 6 / 12 = S/ 1750.
+    // Los días adicionales usan base / 360; se redondea la suma final.
     static func calcularCTS(sueldo: Double, gratificacion: Double, meses: Int,
                             dias: Int, cumpleJornada: Bool) throws -> ResultadoCTS {
         guard sueldo.isFinite, sueldo > 0, sueldo <= 1_000_000,
