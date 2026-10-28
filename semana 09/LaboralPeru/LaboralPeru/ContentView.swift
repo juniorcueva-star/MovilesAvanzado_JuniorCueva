@@ -326,6 +326,10 @@ enum Calculos {
                             porDias: porDias, total: redondear(porMeses + porDias))
     }
 
+    // Gratificación: meses representa meses calendario completos, entre cero y seis.
+    // tieneEPS elige la bonificación: true usa 6.75%; false usa 9% por EsSalud.
+    // Ejemplo sin EPS: 3000 * 6 / 6 = 3000; bono = 270; total = S/ 3270.
+    // Este resultado es anterior a quinta categoría; esta función no calcula el IR.
     static func calcularGratificacion(sueldo: Double, meses: Int, tieneEPS: Bool) throws -> ResultadoGratificacion {
         guard sueldo.isFinite, sueldo > 0, sueldo <= 1_000_000, (0...6).contains(meses) else {
             throw ErrorCalculo(mensaje: "Ingresa un sueldo válido hasta S/ 1,000,000 y entre 0 y 6 meses completos.")
