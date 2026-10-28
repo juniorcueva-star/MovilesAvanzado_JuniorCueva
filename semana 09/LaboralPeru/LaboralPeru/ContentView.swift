@@ -375,6 +375,9 @@ enum Calculos {
     }
 
     // Impuesto progresivo: cada porcentaje se aplica solamente a su tramo.
+    // Primero se restan siete UIT. Si no queda renta gravable, el impuesto es cero.
+    // tamanos contiene la amplitud de cada tramo en UIT; restante guarda lo pendiente.
+    // min toma solo la parte que cabe en el tramo, y el exceso final paga 30%.
     static func calcularImpuestoAnual(ingresos: Double) -> Double {
         var restante = max(0, ingresos - 7 * uit)
         var impuesto = 0.0
@@ -391,6 +394,10 @@ enum Calculos {
 
     // Art. 40 del Reglamento del IR. Ejemplo: mismo sueldo todo 2026 y dos gratificaciones.
     // Al reconstruir enero–diciembre, tenemos las retenciones anteriores sin pedirlas al usuario.
+    // El factor 14 representa doce sueldos y dos gratificaciones completas.
+    // corte indica cuántos meses anteriores se restan; divisor reparte el saldo del impuesto.
+    // En julio y diciembre se agrega la retención por la bonificación extraordinaria.
+    // Se devuelven doce resultados: la pantalla selecciona uno mediante el índice mes - 1.
     static func calcularRetenciones(sueldo: Double) -> [RetencionQuinta] {
         var retenciones: [RetencionQuinta] = []
         let bono = redondear(sueldo * 0.09)
