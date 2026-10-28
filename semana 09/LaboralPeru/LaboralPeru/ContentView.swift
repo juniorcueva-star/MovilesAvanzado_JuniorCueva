@@ -21,6 +21,13 @@ struct ContentView: View {
     @State private var tieneEPS = false
     @State private var resultadoGratificacion: ResultadoGratificacion?
     @State private var errorGratificacion = ""
+    @State private var horasSemanales = "23"
+    @State private var mesPago = 10
+    @State private var usaONP = true
+    @State private var afp = "Integra"
+    @State private var comisionSaldo = false
+    @State private var resultadoInstructor: ResultadoInstructor?
+    @State private var errorInstructor = ""
     @FocusState private var editando: Bool
 
     private let colorPrincipal = Color(red: 0.06, green: 0.38, blue: 0.39)
@@ -32,6 +39,8 @@ struct ContentView: View {
                 .tabItem { Label("CTS", systemImage: "banknote") }
             pantallaGratificacion
                 .tabItem { Label("Gratificación", systemImage: "gift") }
+            pantallaInstructor
+                .tabItem { Label("Instructores", systemImage: "person.crop.rectangle") }
         }
         .tint(colorPrincipal)
     }
@@ -133,6 +142,94 @@ struct ContentView: View {
         }
     }
 
+    private var pantallaInstructor: some View {
+        NavigationStack {
+            Form {
+                Section {
+                    Text("Pago mensual del instructor").font(.headline)
+                    Text("Práctica: S/ 50 por hora · máximo 23 h/semana · 4 semanas")
+                        .font(.subheadline).foregroundStyle(.secondary)
+                    DisclosureGroup("Supuestos del ejemplo 2026") {
+                        Text("Trabajador en planilla, régimen privado general, mismo sueldo de enero a diciembre, un empleador y dos gratificaciones completas. Sin otros ingresos, asignación familiar ni ausencias sin goce. EsSalud; las vacaciones pagadas mantienen el sueldo.")
+                        Text("AFP: tasas de octubre de 2026. El mes seleccionado determina la quinta categoría, la gratificación y el piso de EsSalud.")
+                    }.font(.footnote)
+                }
+                Section("1. Horas y mes") {
+                    campo("Horas semanales", texto: $horasSemanales)
+                    Picker("Mes de pago", selection: $mesPago) {
+                        ForEach(1...12, id: \.self) { mes in
+                            Text(Calculos.meses[mes - 1]).tag(mes)
+                        }
+                    }
+                }
+                Section("2. Sistema de pensiones") {
+                    Picker("Sistema", selection: $usaONP) {
+                        Text("ONP · 13%").tag(true)
+                        Text("AFP").tag(false)
+                    }.pickerStyle(.segmented)
+                    if !usaONP {
+                        Picker("AFP", selection: $afp) {
+                            ForEach(Calculos.afps, id: \.self) { nombre in Text(nombre).tag(nombre) }
+                        }
+                        Toggle("Comisión sobre saldo", isOn: $comisionSaldo)
+                        Text(comisionSaldo
+                             ? "Aporte 10% + seguro 1.37%. La comisión anual se cobra del fondo; no se descuenta del sueldo."
+                             : "Aporte 10% + seguro 1.37% + comisión sobre el sueldo, según AFP.")
+                            .font(.footnote).foregroundStyle(.secondary)
+                    }
+                }
+                Section {
+                    Button("Calcular pago", action: calcularInstructor)
+                        .buttonStyle(.borderedProminent).controlSize(.large)
+                    if !errorInstructor.isEmpty { Text(errorInstructor).foregroundStyle(.red) }
+                }
+                if let resultado = resultadoInstructor {
+                    Section("3. Pago de \(Calculos.meses[mesPago - 1])") {
+                        total("Total a recibir", monto: resultado.totalRecibir)
+                        fila("Sueldo bruto", monto: resultado.bruto)
+                        fila(usaONP ? "Aporte ONP" : "Aporte al fondo AFP", monto: resultado.aporte)
+                        if !usaONP {
+                            fila("Seguro AFP", monto: resultado.seguro)
+                            fila("Comisión sobre sueldo", monto: resultado.comision)
+                        }
+                        fila("Descuento total pensión", monto: resultado.pension)
+                        fila("Renta de quinta categoría", monto: resultado.quinta.total)
+                        fila("Sueldo después de descuentos", monto: resultado.netoSueldo)
+                        if resultado.gratificacion > 0 {
+                            fila("Gratificación del mes", monto: resultado.gratificacion)
+                            fila("Bonificación extraordinaria 9%", monto: resultado.bonificacion)
+                        }
+                        Text("Neto = bruto − pensión − quinta categoría. En julio y diciembre se suman la gratificación y su bonificación para obtener el total a recibir.")
+                            .font(.footnote).foregroundStyle(.secondary)
+                    }
+                    Section("4. Aporte del empleador") {
+                        fila("EsSalud", monto: resultado.essalud)
+                        Text("9% a cargo del empleador; no se descuenta de tu sueldo. En un mes completo la base no puede ser inferior a la RMV.")
+                            .font(.footnote).foregroundStyle(.secondary)
+                    }
+                    Section("5. Cómo se calculó quinta categoría") {
+                        fila("Ingresos anuales para la retención ordinaria", monto: resultado.quinta.ingresosAnuales)
+                        fila("Deducción: 7 UIT de S/ 5,500", monto: 7 * Calculos.uit)
+                        fila("Renta neta anual gravable", monto: max(0, resultado.quinta.ingresosAnuales - 7 * Calculos.uit))
+                        fila("Impuesto anual por tramos", monto: resultado.quinta.impuestoAnual)
+                        fila("Retenciones previas que corresponde restar", monto: resultado.quinta.retencionesPrevias)
+                        LabeledContent("Divisor del periodo", value: "\(resultado.quinta.divisor)")
+                        fila("Retención ordinaria del mes", monto: resultado.quinta.ordinaria)
+                        fila("Retención adicional por bonificación", monto: resultado.quinta.adicional)
+                        Text("Tasas por tramos: 8%, 14%, 17%, 20% y 30%. El cálculo reconstruye las retenciones desde enero para este sueldo constante; no usa siempre impuesto anual / 12.")
+                            .font(.footnote).foregroundStyle(.secondary)
+                    }
+                }
+            }
+            .navigationTitle("Instructores")
+            .scrollDismissesKeyboard(.interactively)
+            .toolbar { ToolbarItemGroup(placement: .keyboard) { Spacer(); Button("Listo") { editando = false } } }
+            .onChange(of: [horasSemanales, "\(mesPago)", "\(usaONP)", afp, "\(comisionSaldo)"]) { _, _ in
+                resultadoInstructor = nil; errorInstructor = ""
+            }
+        }
+    }
+
     // MARK: 3. Acciones de los botones
     private func calcularCTS() {
         editando = false
@@ -153,6 +250,16 @@ struct ContentView: View {
                 meses: mesesGratificacion, tieneEPS: tieneEPS)
             errorGratificacion = ""
         } catch { resultadoGratificacion = nil; errorGratificacion = error.localizedDescription }
+    }
+
+    private func calcularInstructor() {
+        editando = false
+        do {
+            resultadoInstructor = try Calculos.calcularInstructor(
+                horas: Calculos.leerNumero(horasSemanales), mes: mesPago,
+                usaONP: usaONP, afp: afp, comisionSaldo: comisionSaldo)
+            errorInstructor = ""
+        } catch { resultadoInstructor = nil; errorInstructor = error.localizedDescription }
     }
 
     // MARK: 4. Diseño reutilizado en las tres pantallas
@@ -189,6 +296,11 @@ struct ContentView: View {
 // MARK: 5. Fórmulas: están aquí para poder explicarlas junto con la interfaz
 // Se agrupan en Calculos para probarlas sin depender de la pantalla.
 enum Calculos {
+    static let uit = 5500.0 // UIT 2026, D. S. 301-2025-EF.
+    static let meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+    static let afps = ["Habitat", "Integra", "Prima", "Profuturo"]
+
     static func calcularCTS(sueldo: Double, gratificacion: Double, meses: Int,
                             dias: Int, cumpleJornada: Bool) throws -> ResultadoCTS {
         guard sueldo.isFinite, sueldo > 0, sueldo <= 1_000_000,
@@ -220,6 +332,79 @@ enum Calculos {
                                       total: redondear(gratificacion + bonificacion))
     }
 
+    static func calcularInstructor(horas: Double, mes: Int, usaONP: Bool,
+                                   afp: String, comisionSaldo: Bool) throws -> ResultadoInstructor {
+        guard horas.isFinite, horas > 0, horas <= 23, (1...12).contains(mes), afps.contains(afp) else {
+            throw ErrorCalculo(mensaje: "Ingresa más de 0 y hasta 23 horas semanales y selecciona un mes y una AFP válidos.")
+        }
+        // Condiciones del enunciado, no una tarifa fijada por ley.
+        let bruto = redondear(horas * 50 * 4)
+        let tasasComision = ["Habitat": 0.0147, "Integra": 0.0155,
+                             "Prima": 0.0160, "Profuturo": 0.0169]
+        let aporte = redondear(bruto * (usaONP ? 0.13 : 0.10))
+        // SBS octubre 2026. El bruto máximo del ejercicio es menor que el tope asegurable.
+        let seguro = usaONP ? 0 : redondear(min(bruto, 12732.70) * 0.0137)
+        let comision = usaONP || comisionSaldo ? 0 : redondear(bruto * (tasasComision[afp] ?? 0))
+        let pension = redondear(aporte + seguro + comision)
+        let quinta = calcularRetenciones(sueldo: bruto)[mes - 1]
+        let netoSueldo = redondear(bruto - pension - quinta.total)
+        let gratificacion = mes == 7 || mes == 12 ? bruto : 0
+        let bonificacion = redondear(gratificacion * 0.09)
+        // EsSalud lo paga el empleador y no se resta del neto.
+        let rmv = mes >= 10 ? 1230.0 : 1130.0
+        let essalud = redondear(max(bruto, rmv) * 0.09)
+        return ResultadoInstructor(bruto: bruto, aporte: aporte, seguro: seguro,
+            comision: comision, pension: pension, quinta: quinta, netoSueldo: netoSueldo,
+            gratificacion: gratificacion, bonificacion: bonificacion, essalud: essalud,
+            totalRecibir: redondear(netoSueldo + gratificacion + bonificacion))
+    }
+
+    // Impuesto progresivo: cada porcentaje se aplica solamente a su tramo.
+    static func calcularImpuestoAnual(ingresos: Double) -> Double {
+        var restante = max(0, ingresos - 7 * uit)
+        var impuesto = 0.0
+        let tamanos = [5.0, 15.0, 15.0, 10.0]
+        let tasas = [0.08, 0.14, 0.17, 0.20]
+        for i in 0..<tamanos.count {
+            let tramo = min(restante, tamanos[i] * uit)
+            impuesto += tramo * tasas[i]
+            restante -= tramo
+        }
+        impuesto += restante * 0.30
+        return redondear(impuesto)
+    }
+
+    // Art. 40 del Reglamento del IR. Ejemplo: mismo sueldo todo 2026 y dos gratificaciones.
+    // Al reconstruir enero–diciembre, tenemos las retenciones anteriores sin pedirlas al usuario.
+    static func calcularRetenciones(sueldo: Double) -> [RetencionQuinta] {
+        var retenciones: [RetencionQuinta] = []
+        let bono = redondear(sueldo * 0.09)
+        for mes in 1...12 {
+            // La bonificación de julio ya pagada integra los ingresos acumulados desde agosto.
+            let ingresosAnuales = sueldo * 14 + (mes > 7 ? bono : 0)
+            let impuestoAnual = calcularImpuestoAnual(ingresos: ingresosAnuales)
+            let corte: Int
+            let divisor: Int
+            switch mes {
+            case 1...3: corte = 0; divisor = 12
+            case 4: corte = 3; divisor = 9
+            case 5...7: corte = 4; divisor = 8
+            case 8: corte = 7; divisor = 5
+            case 9...11: corte = 8; divisor = 4
+            default: corte = 11; divisor = 1
+            }
+            let previas = redondear(retenciones.prefix(corte).reduce(0) { $0 + $1.total })
+            let ordinaria = redondear(max(0, impuestoAnual - previas) / Double(divisor))
+            // La bonificación extraordinaria del mes genera retención adicional (inciso e).
+            let bonoActual = mes == 7 || mes == 12 ? bono : 0
+            let adicional = redondear(calcularImpuestoAnual(ingresos: ingresosAnuales + bonoActual) - impuestoAnual)
+            retenciones.append(RetencionQuinta(ingresosAnuales: ingresosAnuales,
+                impuestoAnual: impuestoAnual, retencionesPrevias: previas, divisor: divisor,
+                ordinaria: ordinaria, adicional: adicional, total: redondear(ordinaria + adicional)))
+        }
+        return retenciones
+    }
+
     static func leerNumero(_ texto: String) throws -> Double {
         let limpio = texto.trimmingCharacters(in: .whitespacesAndNewlines)
             .replacingOccurrences(of: ",", with: ".")
@@ -245,6 +430,16 @@ struct ResultadoCTS {
 }
 struct ResultadoGratificacion {
     let gratificacion, bonificacion, total: Double
+}
+struct RetencionQuinta {
+    let ingresosAnuales, impuestoAnual, retencionesPrevias: Double
+    let divisor: Int
+    let ordinaria, adicional, total: Double
+}
+struct ResultadoInstructor {
+    let bruto, aporte, seguro, comision, pension: Double
+    let quinta: RetencionQuinta
+    let netoSueldo, gratificacion, bonificacion, essalud, totalRecibir: Double
 }
 struct ErrorCalculo: LocalizedError {
     let mensaje: String
