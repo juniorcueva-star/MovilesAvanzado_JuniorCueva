@@ -1,0 +1,50 @@
+name: Laboratorio 9 - Compilar y probar iOS
+
+on:
+  push:
+    paths:
+      - 'semana 09/LaboralPeru/**'
+      - '.github/workflows/lab09-ios.yml'
+  pull_request:
+    paths:
+      - 'semana 09/LaboralPeru/**'
+      - '.github/workflows/lab09-ios.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  xcode:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Elegir un simulador disponible
+        run: |
+          xcrun simctl list devices available --json > /tmp/simuladores.json
+          python3 - <<'PY'
+          import json, os
+          data = json.load(open('/tmp/simuladores.json'))
+          phones = [d for runtime, devices in data['devices'].items()
+                    if 'iOS' in runtime for d in devices if d['name'].startswith('iPhone')]
+          if not phones:
+              raise SystemExit('No hay simuladores de iPhone disponibles')
+          with open(os.environ['GITHUB_ENV'], 'a') as env:
+              env.write('SIMULATOR_ID=' + phones[0]['udid'] + '\n')
+          PY
+      - name: Compilar app y ejecutar pruebas de calculos
+        run: |
+          xcodebuild test \
+            -project 'semana 09/LaboralPeru/LaboralPeru.xcodeproj' \
+            -scheme LaboralPeru \
+            -destination "platform=iOS Simulator,id=$SIMULATOR_ID" \
+            -resultBundlePath /tmp/Lab09.xcresult \
+            CODE_SIGNING_ALLOWED=NO
+      - name: Guardar resultados de Xcode
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Resultados-Xcode-Lab09
+          path: /tmp/Lab09.xcresult
+          if-no-files-found: ignore
