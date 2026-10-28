@@ -341,6 +341,12 @@ enum Calculos {
                                       total: redondear(gratificacion + bonificacion))
     }
 
+    // Instructor: horas es la cantidad semanal; mes usa 1 para enero y 12 para diciembre.
+    // Con 23 horas, el bruto del ejercicio es 23 * 50 * 4 = S/ 4600.
+    // usaONP elige ONP o AFP. En AFP se separan aporte, seguro y comisión.
+    // comisionSaldo evita descontar del sueldo una comisión que se cobra del fondo.
+    // netoSueldo resta pensión e IR; totalRecibir añade gratificación y bono si corresponden.
+    // El aporte EsSalud se devuelve por separado para mostrar el costo del empleador.
     static func calcularInstructor(horas: Double, mes: Int, usaONP: Bool,
                                    afp: String, comisionSaldo: Bool) throws -> ResultadoInstructor {
         guard horas.isFinite, horas > 0, horas <= 23, (1...12).contains(mes), afps.contains(afp) else {
