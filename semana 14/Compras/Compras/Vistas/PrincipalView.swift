@@ -22,7 +22,7 @@ struct PrincipalView: View {
                     .tabItem { Label("Por pagar", systemImage: "creditcard") }
                 ProductosView()
                     .tabItem { Label("Productos", systemImage: "shippingbox") }
-                PestanaPendiente(titulo: "Proveedores")
+                ProveedoresView()
                     .tabItem { Label("Proveedores", systemImage: "building.2") }
             }
         } else {
@@ -30,7 +30,7 @@ struct PrincipalView: View {
             TabView {
                 ProductosView()
                     .tabItem { Label("Productos", systemImage: "shippingbox") }
-                PestanaPendiente(titulo: "Proveedores")
+                ProveedoresView()
                     .tabItem { Label("Proveedores", systemImage: "building.2") }
                 PestanaPendiente(titulo: "Compra")
                     .tabItem { Label("Compra", systemImage: "cart.badge.plus") }
