@@ -79,7 +79,7 @@ struct LoginView: View {
                 .padding(24)
             }
             .navigationDestination(isPresented: $mostrarRegistro) {
-                Text("Crear cuenta (siguiente commit)")
+                RegistroView()
             }
         }
     }
