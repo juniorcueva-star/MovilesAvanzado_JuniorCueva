@@ -1,0 +1,23 @@
+# PROMPTS.md · Grupo B · Compras
+
+Registro de las consultas a la IA (Claude) con el formato pedido en la guía.
+
+## Consulta 1 · Construcción de la app
+
+| Campo | Detalle |
+| --- | --- |
+| Contexto | Laboratorio 11 (Core Data y SwiftData), trabajo de la semana, Grupo B: caso Compras con SwiftUI + SwiftData, 4 entidades, 9 pantallas y roles Comprador y Supervisor. Se adjuntó la guía en PDF y el [expediente](EXPEDIENTE.md). |
+| Tarea | Crear el proyecto en `semana 14`, implementar login, registro, sesión, pestañas por rol, las 9 pantallas y las reglas (IGV como crédito fiscal, aprobación desde S/ 5,000, costo promedio ponderado, contado o crédito 30 días, cuentas por pagar y resumen). |
+| Restricciones | Solo la parte B. Seguir los nombres de clases y propiedades de la guía. Sin paquetes externos. Usuario único sin distinguir mayúsculas, clave mínima de 6, mensaje genérico en el login. Commits en español al terminar cada etapa. |
+| Formato esperado | Proyecto de Xcode listo para abrir, código comentado, pruebas XCTest con los 9 casos y un workflow que compile en GitHub. |
+| Qué hicimos con la respuesta | Revisamos que los resultados de las pruebas coincidan con los números calculados a mano en el expediente (1,416.00 · 112.00 · 7,080.00 · 115.56). Pendiente: probar cada caso en el simulador de la Mac y ajustar los textos de las pantallas si el docente lo pide. |
+
+## Consulta 2
+
+| Campo | Detalle |
+| --- | --- |
+| Contexto | |
+| Tarea | |
+| Restricciones | |
+| Formato esperado | |
+| Qué hicimos con la respuesta | |
