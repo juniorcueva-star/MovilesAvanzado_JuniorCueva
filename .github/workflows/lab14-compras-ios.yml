@@ -1,0 +1,52 @@
+name: Semana 14 - Compras (SwiftUI + SwiftData)
+
+on:
+  push:
+    paths:
+      - 'semana 14/Compras/**'
+      - '.github/workflows/lab14-compras-ios.yml'
+  pull_request:
+    paths:
+      - 'semana 14/Compras/**'
+      - '.github/workflows/lab14-compras-ios.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  xcode:
+    runs-on: macos-15
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Version de Xcode
+        run: xcodebuild -version
+      - name: Elegir un simulador disponible
+        run: |
+          xcrun simctl list devices available --json > /tmp/simuladores.json
+          python3 - <<'PY'
+          import json, os
+          data = json.load(open('/tmp/simuladores.json'))
+          phones = [d for runtime, devices in data['devices'].items()
+                    if 'iOS' in runtime for d in devices if d['name'].startswith('iPhone')]
+          if not phones:
+              raise SystemExit('No hay simuladores de iPhone disponibles')
+          with open(os.environ['GITHUB_ENV'], 'a') as env:
+              env.write('SIMULATOR_ID=' + phones[-1]['udid'] + '\n')
+          PY
+      - name: Compilar la app y ejecutar los casos de prueba
+        run: |
+          xcodebuild test \
+            -project 'semana 14/Compras/Compras.xcodeproj' \
+            -scheme Compras \
+            -destination "platform=iOS Simulator,id=$SIMULATOR_ID" \
+            -resultBundlePath /tmp/Compras.xcresult \
+            CODE_SIGNING_ALLOWED=NO
+      - name: Guardar resultados de Xcode
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Resultados-Xcode-Compras
+          path: /tmp/Compras.xcresult
+          if-no-files-found: ignore

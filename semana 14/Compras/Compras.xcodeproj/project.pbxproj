@@ -6,8 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		C0A1B2C3D4E5F60718293A19 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C0A1B2C3D4E5F60718293A01 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C0A1B2C3D4E5F60718293A06;
+			remoteInfo = Compras;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		C0A1B2C3D4E5F60718293A04 /* Compras.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Compras.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0A1B2C3D4E5F60718293A10 /* ComprasTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ComprasTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +27,22 @@
 			path = Compras;
 			sourceTree = "<group>";
 		};
+		C0A1B2C3D4E5F60718293A11 /* ComprasTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ComprasTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		C0A1B2C3D4E5F60718293A08 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C0A1B2C3D4E5F60718293A14 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				C0A1B2C3D4E5F60718293A05 /* Compras */,
+				C0A1B2C3D4E5F60718293A11 /* ComprasTests */,
 				C0A1B2C3D4E5F60718293A03 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				C0A1B2C3D4E5F60718293A04 /* Compras.app */,
+				C0A1B2C3D4E5F60718293A10 /* ComprasTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +95,29 @@
 			productReference = C0A1B2C3D4E5F60718293A04 /* Compras.app */;
 			productType = "com.apple.product-type.application";
 		};
+		C0A1B2C3D4E5F60718293A12 /* ComprasTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C0A1B2C3D4E5F60718293A16 /* Build configuration list for PBXNativeTarget "ComprasTests" */;
+			buildPhases = (
+				C0A1B2C3D4E5F60718293A13 /* Sources */,
+				C0A1B2C3D4E5F60718293A14 /* Frameworks */,
+				C0A1B2C3D4E5F60718293A15 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C0A1B2C3D4E5F60718293A1A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				C0A1B2C3D4E5F60718293A11 /* ComprasTests */,
+			);
+			name = ComprasTests;
+			packageProductDependencies = (
+			);
+			productName = ComprasTests;
+			productReference = C0A1B2C3D4E5F60718293A10 /* ComprasTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -82,6 +130,10 @@
 				TargetAttributes = {
 					C0A1B2C3D4E5F60718293A06 = {
 						CreatedOnToolsVersion = 26.3;
+					};
+					C0A1B2C3D4E5F60718293A12 = {
+						CreatedOnToolsVersion = 26.3;
+						TestTargetID = C0A1B2C3D4E5F60718293A06;
 					};
 				};
 			};
@@ -101,12 +153,20 @@
 			projectRoot = "";
 			targets = (
 				C0A1B2C3D4E5F60718293A06 /* Compras */,
+				C0A1B2C3D4E5F60718293A12 /* ComprasTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C0A1B2C3D4E5F60718293A09 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C0A1B2C3D4E5F60718293A15 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -123,7 +183,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C0A1B2C3D4E5F60718293A13 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C0A1B2C3D4E5F60718293A1A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C0A1B2C3D4E5F60718293A06 /* Compras */;
+			targetProxy = C0A1B2C3D4E5F60718293A19 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		C0A1B2C3D4E5F60718293A0B /* Debug */ = {
@@ -303,6 +378,44 @@
 			};
 			name = Release;
 		};
+		C0A1B2C3D4E5F60718293A17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pe.edu.tecsup.juniorcueva.ComprasTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Compras.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Compras";
+			};
+			name = Debug;
+		};
+		C0A1B2C3D4E5F60718293A18 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pe.edu.tecsup.juniorcueva.ComprasTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Compras.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Compras";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -320,6 +433,15 @@
 			buildConfigurations = (
 				C0A1B2C3D4E5F60718293A0E /* Debug */,
 				C0A1B2C3D4E5F60718293A0F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C0A1B2C3D4E5F60718293A16 /* Build configuration list for PBXNativeTarget "ComprasTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0A1B2C3D4E5F60718293A17 /* Debug */,
+				C0A1B2C3D4E5F60718293A18 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
