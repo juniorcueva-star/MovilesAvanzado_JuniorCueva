@@ -14,7 +14,7 @@ struct PrincipalView: View {
         if usuario.esSupervisor {
             // Supervisor: Resumen, Aprobar, Por pagar, Productos, Proveedores
             TabView {
-                PestanaPendiente(titulo: "Resumen")
+                ResumenView()
                     .tabItem { Label("Resumen", systemImage: "chart.bar.xaxis") }
                 AprobarView()
                     .tabItem { Label("Aprobar", systemImage: "checkmark.seal") }
@@ -37,20 +37,6 @@ struct PrincipalView: View {
                 MisComprasView()
                     .tabItem { Label("Mis compras", systemImage: "list.bullet.rectangle") }
             }
-        }
-    }
-}
-
-/// Pantalla temporal mientras se construye cada pestana
-struct PestanaPendiente: View {
-    let titulo: String
-
-    var body: some View {
-        NavigationStack {
-            ContentUnavailableView(titulo, systemImage: "hammer",
-                                   description: Text("Pantalla en construcción"))
-                .navigationTitle(titulo)
-                .conAvatar()
         }
     }
 }
