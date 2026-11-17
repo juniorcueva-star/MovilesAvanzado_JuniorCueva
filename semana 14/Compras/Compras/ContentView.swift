@@ -13,17 +13,7 @@ struct ContentView: View {
 
     var body: some View {
         if let usuario = sesion.usuario {
-            // Temporal: luego se cambia por el TabView segun el rol
-            VStack(spacing: 12) {
-                Text("Hola, \(usuario.nombre)")
-                    .font(.title2.bold())
-                Text("Rol: \(usuario.rol)")
-                    .foregroundStyle(.secondary)
-                Button("Cerrar sesión", role: .destructive) {
-                    sesion.cerrar()
-                }
-                .buttonStyle(.bordered)
-            }
+            PrincipalView(usuario: usuario)
         } else {
             LoginView()
         }
