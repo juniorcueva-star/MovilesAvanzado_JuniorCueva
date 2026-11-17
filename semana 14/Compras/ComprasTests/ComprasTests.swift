@@ -21,7 +21,8 @@ final class ComprasTests: XCTestCase {
     private var proveedor: Proveedor!
     private var laptop: Producto!
 
-    override func setUp() async throws {
+    /// Base de datos nueva en memoria con dos usuarios, un proveedor y la Laptop (stock 40, costo 110.00)
+    private func preparar() throws {
         container = ModelContainerProvider.enMemoria()
         comprador = try ServicioAuth.registrar(nombre: "Maria Torres", usuario: "mtorres",
                                                clave: "123456", confirmacion: "123456",
@@ -37,10 +38,6 @@ final class ComprasTests: XCTestCase {
         try contexto.save()
     }
 
-    override func tearDown() async throws {
-        container = nil
-    }
-
     private func comprar(_ cantidad: Int, a costo: Double, credito: Bool,
                          fecha: Date = .now) throws -> Compra {
         try ServicioCompras.registrar(cantidad: cantidad, costoUnitario: costo, alCredito: credito,
@@ -51,7 +48,8 @@ final class ComprasTests: XCTestCase {
     // MARK: - Registro y login
 
     /// Caso 1: se crea "mtorres" y el repetido se rechaza (tambien en mayusculas, caso 10)
-    func testCaso1UsuarioRepetido() {
+    func testCaso1UsuarioRepetido() throws {
+        try preparar()
         XCTAssertTrue(ServicioAuth.existeUsuario("mtorres", en: contexto))
         XCTAssertThrowsError(try ServicioAuth.registrar(nombre: "Otra Persona", usuario: "mtorres",
                                                         clave: "123456", confirmacion: "123456",
@@ -65,7 +63,8 @@ final class ComprasTests: XCTestCase {
         }
     }
 
-    func testRegistroClaveCortaYDistinta() {
+    func testRegistroClaveCortaYDistinta() throws {
+        try preparar()
         XCTAssertThrowsError(try ServicioAuth.registrar(nombre: "Ana", usuario: "ana", clave: "1234",
                                                         confirmacion: "1234", rol: Rol.comprador,
                                                         en: contexto)) { error in
@@ -81,6 +80,7 @@ final class ComprasTests: XCTestCase {
 
     /// Caso 2: login con clave incorrecta -> mensaje generico
     func testCaso2LoginIncorrecto() throws {
+        try preparar()
         XCTAssertThrowsError(try ServicioAuth.login(usuario: "mtorres", clave: "malaclave",
                                                     en: contexto)) { error in
             XCTAssertEqual(error as? ErrorAuth, .credencialesIncorrectas)
@@ -94,6 +94,7 @@ final class ComprasTests: XCTestCase {
 
     /// Caso 3: 10 a 120.00 al credito
     func testCaso3CompraAlCredito() throws {
+        try preparar()
         let compra = try comprar(10, a: 120, credito: true)
         XCTAssertEqual(compra.subtotal, 1_200.00, accuracy: 0.001)
         XCTAssertEqual(compra.igv, 216.00, accuracy: 0.001)
@@ -108,6 +109,7 @@ final class ComprasTests: XCTestCase {
 
     /// Caso 4: la misma compra al contado queda pagada
     func testCaso4CompraAlContado() throws {
+        try preparar()
         let compra = try comprar(10, a: 120, credito: false)
         XCTAssertTrue(compra.pagada)
         XCTAssertFalse(compra.esPorPagar)
@@ -115,6 +117,7 @@ final class ComprasTests: XCTestCase {
 
     /// Caso 5: 50 a 120.00 -> total 7,080.00 y queda Pendiente sin cambiar nada
     func testCaso5CompraGrandePendiente() throws {
+        try preparar()
         let compra = try comprar(50, a: 120, credito: true)
         XCTAssertEqual(compra.total, 7_080.00, accuracy: 0.001)
         XCTAssertEqual(compra.estado, EstadoCompra.pendiente)
@@ -125,6 +128,7 @@ final class ComprasTests: XCTestCase {
 
     /// Caso 6: el supervisor aprueba la compra del caso 5
     func testCaso6SupervisorAprueba() throws {
+        try preparar()
         let compra = try comprar(50, a: 120, credito: true)
         try ServicioCompras.aprobar(compra, por: supervisor, en: contexto)
         XCTAssertEqual(compra.estado, EstadoCompra.aprobada)
@@ -135,6 +139,7 @@ final class ComprasTests: XCTestCase {
 
     /// Caso 7: rechazo sin motivo no se puede; con motivo queda Rechazada y el stock no cambia
     func testCaso7RechazoConMotivo() throws {
+        try preparar()
         let compra = try comprar(50, a: 120, credito: false)
         XCTAssertThrowsError(try ServicioCompras.rechazar(compra, motivo: "   ", por: supervisor,
                                                           en: contexto))
@@ -149,6 +154,7 @@ final class ComprasTests: XCTestCase {
 
     /// Caso 8: compra al credito ya vencida; al pagar sale de vencidas y baja el total por pagar
     func testCaso8VencidaYPagar() throws {
+        try preparar()
         let haceCuarentaDias = Calendar.current.date(byAdding: .day, value: -40, to: .now)!
         let compra = try comprar(10, a: 120, credito: true, fecha: haceCuarentaDias)
         XCTAssertTrue(compra.estaVencida())
@@ -176,6 +182,7 @@ final class ComprasTests: XCTestCase {
 
     /// Caso 9: un comprador no puede pagar
     func testCaso9CompradorNoPuedePagar() throws {
+        try preparar()
         let compra = try comprar(10, a: 120, credito: true)
         XCTAssertThrowsError(try ServicioCompras.pagar(compra, por: comprador, en: contexto)) { error in
             XCTAssertEqual(error as? ErrorCompra, .sinPermiso)
@@ -187,6 +194,7 @@ final class ComprasTests: XCTestCase {
 
     /// Caso 11: un producto con compras no se puede borrar (.deny)
     func testCaso11ProductoConComprasNoSeBorra() throws {
+        try preparar()
         _ = try comprar(1, a: 120, credito: false)
         XCTAssertFalse(laptop.compras.isEmpty)
         XCTAssertFalse(proveedor.compras.isEmpty)
@@ -194,14 +202,16 @@ final class ComprasTests: XCTestCase {
 
     // MARK: - Funciones puras
 
-    func testCostoPromedioPonderado() {
+    func testCostoPromedioPonderado() throws {
+        try preparar()
         XCTAssertEqual(ReglasCompra.nuevoCostoPromedio(stockActual: 40, costoPromedio: 110,
                                                        cantidad: 10, costoUnitario: 120), 112.00, accuracy: 0.001)
         XCTAssertEqual(ReglasCompra.nuevoCostoPromedio(stockActual: 0, costoPromedio: 0,
                                                        cantidad: 5, costoUnitario: 35), 35.00, accuracy: 0.001)
     }
 
-    func testLimiteDeAprobacion() {
+    func testLimiteDeAprobacion() throws {
+        try preparar()
         XCTAssertFalse(ReglasCompra.requiereAprobacion(total: 4_999.99))
         XCTAssertTrue(ReglasCompra.requiereAprobacion(total: 5_000.00))
     }
