@@ -16,7 +16,7 @@ struct PrincipalView: View {
             TabView {
                 PestanaPendiente(titulo: "Resumen")
                     .tabItem { Label("Resumen", systemImage: "chart.bar.xaxis") }
-                PestanaPendiente(titulo: "Aprobar")
+                AprobarView()
                     .tabItem { Label("Aprobar", systemImage: "checkmark.seal") }
                 PestanaPendiente(titulo: "Por pagar")
                     .tabItem { Label("Por pagar", systemImage: "creditcard") }
