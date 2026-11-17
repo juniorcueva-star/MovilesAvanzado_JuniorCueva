@@ -32,7 +32,7 @@ struct PrincipalView: View {
                     .tabItem { Label("Productos", systemImage: "shippingbox") }
                 ProveedoresView()
                     .tabItem { Label("Proveedores", systemImage: "building.2") }
-                PestanaPendiente(titulo: "Compra")
+                NuevaCompraView()
                     .tabItem { Label("Compra", systemImage: "cart.badge.plus") }
                 PestanaPendiente(titulo: "Mis compras")
                     .tabItem { Label("Mis compras", systemImage: "list.bullet.rectangle") }
