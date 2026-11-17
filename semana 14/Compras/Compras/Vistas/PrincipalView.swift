@@ -34,7 +34,7 @@ struct PrincipalView: View {
                     .tabItem { Label("Proveedores", systemImage: "building.2") }
                 NuevaCompraView()
                     .tabItem { Label("Compra", systemImage: "cart.badge.plus") }
-                PestanaPendiente(titulo: "Mis compras")
+                MisComprasView()
                     .tabItem { Label("Mis compras", systemImage: "list.bullet.rectangle") }
             }
         }
