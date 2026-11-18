@@ -6,9 +6,18 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct PrincipalView: View {
     let usuario: Usuario
+
+    // Compras que esperan aprobacion: su cantidad sale como numero en la pestana Aprobar
+    @Query(filter: #Predicate<Compra> { $0.estado == "Pendiente" })
+    private var pendientes: [Compra]
+
+    init(usuario: Usuario) {
+        self.usuario = usuario
+    }
 
     var body: some View {
         if usuario.esSupervisor {
@@ -18,6 +27,7 @@ struct PrincipalView: View {
                     .tabItem { Label("Resumen", systemImage: "chart.bar.xaxis") }
                 AprobarView()
                     .tabItem { Label("Aprobar", systemImage: "checkmark.seal") }
+                    .badge(pendientes.count)   // 0 no muestra nada
                 PorPagarView()
                     .tabItem { Label("Por pagar", systemImage: "creditcard") }
                 ProductosView()
