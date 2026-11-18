@@ -210,6 +210,46 @@ final class ComprasTests: XCTestCase {
                                                        cantidad: 5, costoUnitario: 35), 35.00, accuracy: 0.001)
     }
 
+    // MARK: - Valor agregado
+
+    /// RUC: 11 digitos y empieza con 10 o 20
+    func testRucValido() {
+        XCTAssertTrue(ReglasCompra.rucValido("20512345678"))
+        XCTAssertTrue(ReglasCompra.rucValido("10456789012"))
+        XCTAssertFalse(ReglasCompra.rucValido("30512345678"))   // no empieza con 10 o 20
+        XCTAssertFalse(ReglasCompra.rucValido("2051234567"))    // 10 digitos
+        XCTAssertFalse(ReglasCompra.rucValido("2051234567A"))   // tiene una letra
+    }
+
+    /// Stock bajo: 5 o menos
+    func testStockBajo() {
+        XCTAssertTrue(ReglasCompra.esStockBajo(3))
+        XCTAssertTrue(ReglasCompra.esStockBajo(5))
+        XCTAssertFalse(ReglasCompra.esStockBajo(6))
+        XCTAssertFalse(Producto(nombre: "Laptop", categoria: "Cómputo", stock: 40, costoPromedio: 110).tieneStockBajo)
+    }
+
+    /// Historial del supervisor: el filtro por estado encuentra cada compra
+    func testHistorialPorEstado() throws {
+        try preparar()
+        _ = try comprar(10, a: 120, credito: true)                  // Aprobada
+        let grande = try comprar(50, a: 120, credito: true)         // Pendiente
+        let otra = try comprar(60, a: 120, credito: false)          // Pendiente -> Rechazada
+        try ServicioCompras.rechazar(otra, motivo: "Muy caro", por: supervisor, en: contexto)
+
+        func contar(_ filtro: FiltroHistorial) throws -> Int {
+            guard let estado = filtro.estado else {
+                return try contexto.fetchCount(FetchDescriptor<Compra>())
+            }
+            return try contexto.fetchCount(FetchDescriptor<Compra>(predicate: #Predicate { $0.estado == estado }))
+        }
+        XCTAssertEqual(try contar(.todas), 3)
+        XCTAssertEqual(try contar(.aprobadas), 1)
+        XCTAssertEqual(try contar(.pendientes), 1)
+        XCTAssertEqual(try contar(.rechazadas), 1)
+        XCTAssertTrue(grande.estaPendiente)
+    }
+
     func testLimiteDeAprobacion() throws {
         try preparar()
         XCTAssertFalse(ReglasCompra.requiereAprobacion(total: 4_999.99))

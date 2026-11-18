@@ -4,6 +4,7 @@
 //
 //  B9 · Resumen del supervisor: inventario, credito fiscal, por pagar,
 //  compras por aprobar y total comprado por proveedor con barras.
+//  Valor agregado: alerta de stock bajo y enlace a Todas las compras.
 //
 
 import SwiftUI
@@ -61,6 +62,11 @@ struct ResumenView: View {
             .sorted { $0.total > $1.total }
     }
 
+    /// Productos con stock bajo (5 o menos), el de menor stock primero
+    private var productosStockBajo: [Producto] {
+        productos.filter { $0.tieneStockBajo }.sorted { $0.stock < $1.stock }
+    }
+
     private let columnas = [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)]
 
     var body: some View {
@@ -92,6 +98,45 @@ struct ResumenView: View {
                                          detalle: "\(pendientes.count) compras",
                                          icono: "checkmark.seal.fill", color: .orange)
                     }
+
+                    // Valor agregado: alerta de stock bajo
+                    if !productosStockBajo.isEmpty {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Label("Stock bajo (\(ReglasCompra.stockMinimo) o menos)",
+                                  systemImage: "exclamationmark.triangle.fill")
+                                .font(.headline)
+                                .foregroundStyle(.red)
+                            ForEach(productosStockBajo) { producto in
+                                HStack {
+                                    Text(producto.nombre)
+                                    Spacer()
+                                    InsigniaStock(stock: producto.stock)
+                                }
+                            }
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding()
+                        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 16))
+                    }
+
+                    // Valor agregado: historial con todas las compras ("ver todo")
+                    NavigationLink {
+                        TodasComprasView()
+                    } label: {
+                        HStack {
+                            Label("Todas las compras", systemImage: "list.bullet.rectangle.portrait")
+                                .font(.headline)
+                            Spacer()
+                            Text("\(compras.count)")
+                                .foregroundStyle(.secondary)
+                            Image(systemName: "chevron.right")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                        .padding()
+                        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 16))
+                    }
+                    .buttonStyle(.plain)
 
                     // ⑤ Total comprado por proveedor con barras
                     VStack(alignment: .leading, spacing: 8) {
