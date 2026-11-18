@@ -45,7 +45,8 @@ struct LoginView: View {
                             .campoLogin(icono: "person")
 
                         // ③ Clave oculta
-                        SecureField("Clave", text: $clave)
+                        // Empieza oculta; el ojo la muestra (CampoClave)
+                        CampoClave(titulo: "Clave", texto: $clave)
                             .textContentType(.password)
                             .campoLogin(icono: "lock")
 

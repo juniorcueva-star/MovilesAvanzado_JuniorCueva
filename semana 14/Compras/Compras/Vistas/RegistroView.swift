@@ -49,8 +49,8 @@ struct RegistroView: View {
 
             // ④ Clave (minimo 6) y confirmacion
             Section {
-                SecureField("Clave", text: $clave)
-                SecureField("Confirmar clave", text: $confirmacion)
+                CampoClave(titulo: "Clave", texto: $clave)
+                CampoClave(titulo: "Confirmar clave", texto: $confirmacion)
                 if claveCorta {
                     Text("Mínimo \(ServicioAuth.minimoClave) caracteres")
                         .font(.footnote)
