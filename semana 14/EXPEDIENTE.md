@@ -4,7 +4,7 @@
 
 | Dato | Valor |
 | --- | --- |
-| Integrantes | Junior Cueva Fabian · (compañero) |
+| Integrantes | Junior Cueva Fabian  |
 | Grupo | B |
 | App | **Compras** (SwiftUI + SwiftData) |
 | Curso | Programación en Móviles Avanzado · 5 C24 · Tecsup |
