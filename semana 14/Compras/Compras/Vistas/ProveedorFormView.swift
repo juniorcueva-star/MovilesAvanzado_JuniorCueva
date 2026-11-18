@@ -23,11 +23,19 @@ struct ProveedorFormView: View {
         _ruc = State(initialValue: proveedor?.ruc ?? "")
     }
 
-    /// RUC peruano: 11 digitos
-    private var rucValido: Bool { ruc.count == 11 && ruc.allSatisfy(\.isNumber) }
+    /// RUC peruano: 11 digitos y empieza con 10 o 20 (regla en ReglasCompra)
+    private var rucValido: Bool { ReglasCompra.rucValido(ruc) }
+
+    /// RUC repetido: otro proveedor ya lo tiene (#Predicate, sin contar al que se edita)
+    private var rucRepetido: Bool {
+        let buscado = ruc
+        let descriptor = FetchDescriptor<Proveedor>(predicate: #Predicate { $0.ruc == buscado })
+        let encontrados = (try? modelContext.fetch(descriptor)) ?? []
+        return encontrados.contains { $0.persistentModelID != proveedor?.persistentModelID }
+    }
 
     private var esValido: Bool {
-        !nombre.trimmingCharacters(in: .whitespaces).isEmpty && rucValido
+        !nombre.trimmingCharacters(in: .whitespaces).isEmpty && rucValido && !rucRepetido
     }
 
     var body: some View {
@@ -41,7 +49,10 @@ struct ProveedorFormView: View {
                     Text("Proveedor")
                 } footer: {
                     if !ruc.isEmpty && !rucValido {
-                        Text("El RUC debe tener 11 dígitos")
+                        Text("El RUC debe tener 11 dígitos y empezar con 10 o 20")
+                            .foregroundStyle(.red)
+                    } else if rucRepetido {
+                        Text("Ese RUC ya está registrado")
                             .foregroundStyle(.red)
                     }
                 }

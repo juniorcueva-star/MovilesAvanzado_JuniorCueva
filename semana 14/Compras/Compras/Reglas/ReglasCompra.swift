@@ -13,6 +13,7 @@ enum ReglasCompra {
     static let tasaIGV = 0.18               // 18 %
     static let limiteAprobacion = 5_000.0   // Desde S/ 5,000 necesita aprobacion
     static let diasCredito = 30
+    static let stockMinimo = 5              // Stock bajo: 5 unidades o menos
 
     /// Redondea a 2 decimales (centimos)
     static func redondear(_ valor: Double) -> Double {
@@ -57,6 +58,18 @@ enum ReglasCompra {
     static func fechaVencimiento(desde fecha: Date, alCredito: Bool) -> Date {
         guard alCredito else { return fecha }
         return Calendar.current.date(byAdding: .day, value: diasCredito, to: fecha) ?? fecha
+    }
+
+    /// RUC peruano: 11 digitos y empieza con 10 (persona natural) o 20 (empresa)
+    static func rucValido(_ ruc: String) -> Bool {
+        ruc.count == 11
+            && ruc.allSatisfy(\.isNumber)
+            && (ruc.hasPrefix("10") || ruc.hasPrefix("20"))
+    }
+
+    /// Stock bajo: el producto tiene 5 unidades o menos
+    static func esStockBajo(_ stock: Int) -> Bool {
+        stock <= stockMinimo
     }
 }
 

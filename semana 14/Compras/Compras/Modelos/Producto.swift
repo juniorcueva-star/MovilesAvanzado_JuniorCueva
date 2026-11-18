@@ -26,4 +26,7 @@ final class Producto {
 
     /// Valor del inventario = stock x costo promedio (calculado, no se guarda)
     var valorInventario: Double { Double(stock) * costoPromedio }
+
+    /// Stock bajo (5 o menos): se avisa en el Resumen del supervisor
+    var tieneStockBajo: Bool { ReglasCompra.esStockBajo(stock) }
 }
