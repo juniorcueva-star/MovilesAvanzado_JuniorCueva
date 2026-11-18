@@ -4,6 +4,7 @@ App **Compras** en **SwiftUI + SwiftData** para una distribuidora: proveedores, 
 
 - Proyecto para abrir en la Mac: [`Compras/Compras.xcodeproj`](Compras/Compras.xcodeproj)
 - [Expediente del caso](EXPEDIENTE.md) (modelo, permisos, reglas con ejemplos y casos de prueba)
+- [Requerimientos y valor agregado](REQUERIMIENTOS.md)
 - [Registro de consultas a la IA](PROMPTS.md)
 
 Requiere **Xcode 16 o posterior** y un simulador con **iOS 17 o posterior**. No usa paquetes externos.
@@ -23,7 +24,7 @@ Elige el esquema **Compras**, un iPhone del simulador y pulsa **Run** (⌘R). La
 | `Modelos/` | Las cuatro clases `@Model` (`Usuario`, `Proveedor`, `Producto`, `Compra`) y `ModelContainerProvider` (archivo `ComprasData.sqlite`) |
 | `Sesion/` | `Sesion` (`@Observable`, usuario conectado) y `ServicioAuth` (registro y login con `FetchDescriptor` + `#Predicate` + `fetchCount`) |
 | `Reglas/` | `ReglasCompra` (IGV, aprobación, costo promedio), `ServicioCompras` (registrar, aprobar, rechazar, pagar), `DatosEjemplo` y formato de soles |
-| `Vistas/` | Las 9 pantallas y el menú del avatar |
+| `Vistas/` | Las 9 pantallas, el menú del avatar, el historial del supervisor y el campo de clave |
 | `ComprasTests/` | Los casos de prueba del laboratorio con XCTest |
 
 ## Pantallas
