@@ -15,50 +15,23 @@ struct AuthView: View {
     @State private var isSignedIn = false
     @State private var showAlert = false
     @State private var alertMessage = ""
+    @State private var isLoading = false
     @State private var authStateListener: AuthStateDidChangeListenerHandle?
 
     var body: some View {
-        NavigationView {
-            VStack(spacing: 20) {
-                Text("Lab 14: Firebase")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding(.top, 50)
-
-                Spacer()
+        NavigationStack {
+            ZStack {
+                AppBackground()
 
                 if isSignedIn {
                     // Show MessagesView when signed in
                     MessagesView()
                 } else {
                     // Sign in form
-                    VStack(spacing: 15) {
-                        TextField("Email", text: $email)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .autocapitalization(.none)
-                            .keyboardType(.emailAddress)
-
-                        SecureField("Password", text: $password)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-
-                        HStack(spacing: 20) {
-                            Button("Sign In") {
-                                signIn()
-                            }
-                            .buttonStyle(PrimaryButtonStyle())
-
-                            Button("Sign Up") {
-                                signUp()
-                            }
-                            .buttonStyle(SecondaryButtonStyle())
-                        }
-                    }
-                    .padding(.horizontal, 30)
+                    signInForm
                 }
-
-                Spacer()
             }
-            .navigationBarHidden(true)
+            .toolbar(.hidden, for: .navigationBar)
         }
         .alert("Message", isPresented: $showAlert) {
             Button("OK") { }
@@ -77,6 +50,71 @@ struct AuthView: View {
         }
     }
 
+    // MARK: - Sign in form
+    private var signInForm: some View {
+        ScrollView {
+            VStack(spacing: 32) {
+                header
+
+                VStack(spacing: 14) {
+                    InputField(icon: "envelope.fill", placeholder: "Email", text: $email)
+                    PasswordField(text: $password)
+                }
+
+                VStack(spacing: 12) {
+                    Button {
+                        signIn()
+                    } label: {
+                        if isLoading {
+                            ProgressView()
+                                .tint(.white)
+                        } else {
+                            Text("Sign In")
+                        }
+                    }
+                    .buttonStyle(PrimaryButtonStyle())
+
+                    Button("Sign Up") {
+                        signUp()
+                    }
+                    .buttonStyle(SecondaryButtonStyle())
+                }
+                .disabled(isLoading)
+
+                Label("Secured by Firebase Authentication", systemImage: "checkmark.shield.fill")
+                    .font(.footnote)
+                    .foregroundStyle(Theme.textSecondary)
+            }
+            .padding(.horizontal, 28)
+            .padding(.top, 70)
+            .padding(.bottom, 40)
+        }
+        .scrollDismissesKeyboard(.interactively)
+    }
+
+    private var header: some View {
+        VStack(spacing: 14) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 26, style: .continuous)
+                    .fill(Theme.gradient)
+                    .frame(width: 88, height: 88)
+                    .shadow(color: Theme.pink.opacity(0.5), radius: 22, y: 10)
+
+                Image(systemName: "flame.fill")
+                    .font(.system(size: 42, weight: .semibold))
+                    .foregroundStyle(.white)
+            }
+
+            Text("Lab 14: Firebase")
+                .font(.system(size: 32, weight: .bold, design: .rounded))
+                .foregroundStyle(.white)
+
+            Text("Sign in or create your account")
+                .font(.subheadline)
+                .foregroundStyle(Theme.textSecondary)
+        }
+    }
+
     // MARK: - Authentication Functions
     func signIn() {
         guard !email.isEmpty && !password.isEmpty else {
@@ -85,7 +123,9 @@ struct AuthView: View {
             return
         }
 
+        isLoading = true
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            isLoading = false
             if let error = error {
                 alertMessage = "Sign in failed: \(error.localizedDescription)"
                 showAlert = true
@@ -111,7 +151,9 @@ struct AuthView: View {
             return
         }
 
+        isLoading = true
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
+            isLoading = false
             if let error = error {
                 alertMessage = "Sign up failed: \(error.localizedDescription)"
                 showAlert = true
@@ -149,39 +191,50 @@ struct AuthView: View {
 struct PrimaryButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .foregroundColor(.white)
-            .padding()
-            .background(Color.blue)
-            .cornerRadius(10)
-            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+            .font(.headline)
+            .foregroundStyle(.white)
+            .frame(maxWidth: .infinity)
+            .frame(height: 54)
+            .background(Theme.gradient)
+            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .shadow(color: Theme.pink.opacity(0.45), radius: 14, y: 8)
+            .scaleEffect(configuration.isPressed ? 0.97 : 1.0)
+            .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
     }
 }
 
 struct SecondaryButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .foregroundColor(.blue)
-            .padding()
-            .background(Color.clear)
+            .font(.headline)
+            .foregroundStyle(.white)
+            .frame(maxWidth: .infinity)
+            .frame(height: 54)
+            .background(Theme.card)
+            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
             .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.blue, lineWidth: 2)
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .stroke(Theme.gradient, lineWidth: 1.5)
             )
-            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+            .scaleEffect(configuration.isPressed ? 0.97 : 1.0)
+            .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
     }
 }
 
 struct SignOutButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .foregroundColor(.white)
-            .padding()
-            .background(Color.red)
-            .cornerRadius(10)
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(.white)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 9)
+            .background(Color.red.opacity(0.85))
+            .clipShape(Capsule())
             .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
     }
 }
 
 #Preview {
     AuthView()
+        .preferredColorScheme(.dark)
 }

@@ -19,6 +19,7 @@ struct Lab14IntroFirebaseApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .preferredColorScheme(.dark) // La app siempre se muestra en modo oscuro
         }
     }
 }
