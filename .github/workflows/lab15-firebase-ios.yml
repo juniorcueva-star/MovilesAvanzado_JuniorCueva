@@ -39,4 +39,5 @@ jobs:
             CODE_SIGNING_ALLOWED=NO | tee /tmp/build.log
       - name: Mostrar errores de compilacion
         if: failure()
-        run: grep -E "error:|warning: .*will be an error" /tmp/build.log | head -50 || true
+        run: |
+          grep -E "error:" /tmp/build.log | head -50 || true
