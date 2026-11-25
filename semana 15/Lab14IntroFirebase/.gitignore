@@ -1,0 +1,3 @@
+# Archivo de configuración de Firebase (contiene las claves del proyecto).
+# Se descarga desde la consola de Firebase y se copia en Lab14IntroFirebase/
+GoogleService-Info.plist
