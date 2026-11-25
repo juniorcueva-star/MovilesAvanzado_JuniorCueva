@@ -1,0 +1,42 @@
+name: Semana 15 - Lab14 Firebase (compilar iOS)
+
+on:
+  push:
+    paths:
+      - 'semana 15/Lab14IntroFirebase/**'
+      - '.github/workflows/lab15-firebase-ios.yml'
+  pull_request:
+    paths:
+      - 'semana 15/Lab14IntroFirebase/**'
+      - '.github/workflows/lab15-firebase-ios.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  xcode:
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Version de Xcode
+        run: xcodebuild -version
+      - name: Descargar paquetes (Firebase y GoogleSignIn)
+        run: |
+          xcodebuild -resolvePackageDependencies \
+            -project 'semana 15/Lab14IntroFirebase/Lab14IntroFirebase.xcodeproj' \
+            -scheme Lab14IntroFirebase
+      - name: Compilar la app para el simulador
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -project 'semana 15/Lab14IntroFirebase/Lab14IntroFirebase.xcodeproj' \
+            -scheme Lab14IntroFirebase \
+            -destination 'generic/platform=iOS Simulator' \
+            -skipMacroValidation \
+            -skipPackagePluginValidation \
+            CODE_SIGNING_ALLOWED=NO | tee /tmp/build.log
+      - name: Mostrar errores de compilacion
+        if: failure()
+        run: grep -E "error:|warning: .*will be an error" /tmp/build.log | head -50 || true

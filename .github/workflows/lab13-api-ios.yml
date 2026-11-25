@@ -1,0 +1,39 @@
+name: Semana 13 - Consumir API (compilar iOS)
+
+on:
+  push:
+    paths:
+      - 'semana 13/**'
+      - '.github/workflows/lab13-api-ios.yml'
+  pull_request:
+    paths:
+      - 'semana 13/**'
+      - '.github/workflows/lab13-api-ios.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  xcode:
+    runs-on: macos-15
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        proyecto: [Semana13_API, Semana13_MetodosAPI, Semana13_AsyncAwait]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Version de Xcode
+        run: xcodebuild -version
+      - name: Compilar ${{ matrix.proyecto }} para el simulador
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -project "semana 13/${{ matrix.proyecto }}/${{ matrix.proyecto }}.xcodeproj" \
+            -scheme "${{ matrix.proyecto }}" \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO | tee /tmp/build.log
+      - name: Mostrar errores de compilacion
+        if: failure()
+        run: grep -E "error:" /tmp/build.log | head -50 || true
