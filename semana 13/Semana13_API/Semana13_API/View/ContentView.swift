@@ -12,12 +12,19 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            List(viewModel.users) { user in
-                Text(user.name) // Mostrar solo el nombre
+            VStack {
+                // Campo de búsqueda
+                TextField("Buscar usuario por nombre", text: $viewModel.searchText)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+
+                // Lista de usuarios filtrados
+                List(viewModel.filteredUsers) { user in
+                    Text(user.name)
+                }
             }
-            .navigationTitle("Usuarios - API")
+            .navigationTitle("Usuarios")
             .onAppear {
-                // Llama a la función fetchUsers() del ViewModel que se encarga de realizar la petición a la API
                 viewModel.fetchUsers()
             }
         }
