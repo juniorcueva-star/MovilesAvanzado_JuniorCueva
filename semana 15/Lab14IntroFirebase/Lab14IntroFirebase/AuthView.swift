@@ -20,23 +20,20 @@ struct AuthView: View {
     @State private var authStateListener: AuthStateDidChangeListenerHandle?
 
     var body: some View {
-        NavigationStack {
-            ZStack {
-                AppBackground()
+        ZStack {
+            AppBackground()
 
-                if isSignedIn {
-                    // Show MessagesView when signed in
-                    MessagesView()
-                        .transition(.opacity.combined(with: .move(edge: .trailing)))
-                } else {
-                    // Sign in form
-                    signInForm
-                        .transition(.opacity.combined(with: .scale(scale: 0.96)))
-                }
+            if isSignedIn {
+                // Show the chat list (general chat + private chats) when signed in
+                HomeView()
+                    .transition(.opacity.combined(with: .move(edge: .trailing)))
+            } else {
+                // Sign in form
+                signInForm
+                    .transition(.opacity.combined(with: .scale(scale: 0.96)))
             }
-            .animation(.easeInOut(duration: 0.35), value: isSignedIn)
-            .toolbar(.hidden, for: .navigationBar)
         }
+        .animation(.easeInOut(duration: 0.35), value: isSignedIn)
         .alert("Message", isPresented: $showAlert) {
             Button("OK") { }
         } message: {
