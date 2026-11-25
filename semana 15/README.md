@@ -10,9 +10,14 @@ Bundle Identifier: `pe.edu.tecsup.dma.Lab14IntroFirebase`
 |---|---|
 | `Lab14IntroFirebaseApp.swift` | Inicia la app y llama a `FirebaseApp.configure()` |
 | `ContentView.swift` | Muestra `AuthView` |
-| `AuthView.swift` | Registro (Sign Up), inicio (Sign In) y cierre de sesión con FirebaseAuth |
-| `DatabaseService.swift` | Guarda y escucha en tiempo real los mensajes en Cloud Firestore |
-| `MessagesView.swift` | Chat con los mensajes de todos los usuarios |
+| `AuthView.swift` | Acceso con Google o con email y contraseña (Sign Up / Sign In) usando FirebaseAuth |
+| `HomeView.swift` | Lista de chats: perfil, chat general y chats privados con búsqueda |
+| `DatabaseService.swift` | Guarda y escucha en tiempo real los mensajes del chat general en Cloud Firestore |
+| `MessagesView.swift` | Chat general con los mensajes de todos los usuarios |
+| `ChatService.swift` | Perfiles de usuario, conversaciones privadas y sus mensajes en Firestore |
+| `PrivateChatView.swift` | Conversación privada entre dos usuarios |
+| `ChatComponents.swift` | Lista de mensajes, burbujas, separadores por día y barra de envío reutilizables |
+| `ChatModels.swift` | Modelos `AppUser`, `ChatSummary` y rutas de navegación |
 | `Theme.swift` | Colores, fondo, avatares y campos reutilizables del diseño |
 
 ---
@@ -20,7 +25,7 @@ Bundle Identifier: `pe.edu.tecsup.dma.Lab14IntroFirebase`
 ## Cómo ejecutarlo
 
 1. Crear el proyecto `App01-Lab14` en la [consola de Firebase](https://console.firebase.google.com).
-2. En **Authentication > Sign-in method** activar **Email/Password**.
+2. En **Authentication > Sign-in method** activar **Email/Password** y **Google**.
 3. En **Firestore Database > Create database** elegir la ubicación `nam5` y **Start in test mode**.
 4. Agregar una app iOS con el bundle `pe.edu.tecsup.dma.Lab14IntroFirebase` y descargar `GoogleService-Info.plist`.
 5. Copiar `GoogleService-Info.plist` dentro de la carpeta `Lab14IntroFirebase/` (junto a `ContentView.swift`).
@@ -28,7 +33,18 @@ Bundle Identifier: `pe.edu.tecsup.dma.Lab14IntroFirebase`
 
 > El repositorio ya incluye `GoogleService-Info.plist` del proyecto `App01-Lab14`, así que basta con clonar, abrir el proyecto y ejecutar (los pasos 1 al 5 ya están hechos).
 
-Paquetes de Firebase usados (Swift Package Manager, `https://github.com/firebase/firebase-ios-sdk`): `FirebaseAuth`, `FirebaseCore`, `FirebaseDatabase` y `FirebaseFirestore`.
+Paquetes usados (Swift Package Manager):
+- `https://github.com/firebase/firebase-ios-sdk`: `FirebaseAuth`, `FirebaseCore`, `FirebaseDatabase` y `FirebaseFirestore`.
+- `https://github.com/google/GoogleSignIn-iOS`: `GoogleSignIn` (botón "Continue with Google").
+
+Estructura en Cloud Firestore:
+
+| Colección | Contenido |
+|---|---|
+| `messages` | Mensajes del chat general |
+| `users` | Perfil de cada usuario (uid, email, nombre y foto) |
+| `chats` | Una conversación privada por pareja de usuarios (participantes y último mensaje) |
+| `chats/{id}/messages` | Mensajes de esa conversación privada |
 
 ---
 
@@ -52,6 +68,7 @@ Inicializa Firebase en la app. Lee la configuración de `GoogleService-Info.plis
 - `signIn(withEmail:password:completion:)`: inicia sesión con un usuario ya registrado. Devuelve un `AuthDataResult` con el usuario o un error si los datos son incorrectos.
 - `signOut()`: cierra la sesión del usuario actual. Es una función que puede lanzar errores, por eso se usa con `try` dentro de `do/catch`.
 - `addStateDidChangeListener(_:)`: registra un oyente que se ejecuta cada vez que cambia el estado de la sesión (al iniciar la app, al entrar o al salir). Devuelve un `AuthStateDidChangeListenerHandle`. Se usa para actualizar `isSignedIn` automáticamente.
+- `signIn(with:completion:)`: inicia sesión con una credencial de otro proveedor; aquí con `GoogleAuthProvider.credential(withIDToken:accessToken:)` después de elegir la cuenta de Google.
 - `sendPasswordReset(withEmail:completion:)`: envía al correo del usuario un enlace para crear una nueva contraseña (botón "Forgot password?").
 - `currentUser`: el usuario que tiene la sesión iniciada (o `nil`). Se usa en `DatabaseService` y `MessagesView` para obtener su email.
 
@@ -79,20 +96,24 @@ Otros que también servirían: Analytics (uso de la app), Cloud Functions (lógi
 
 ## Requerimientos (qué hace la app)
 
-**Cuenta y sesión**
-- Registrarse con email y contraseña (mínimo 6 caracteres).
-- Iniciar y cerrar sesión.
-- Recordar la sesión: al volver a abrir la app entra directo al chat.
-- Recuperar la contraseña por correo ("Forgot password?").
-- Mostrar u ocultar la contraseña.
-- Validar los campos y mostrar mensajes de éxito o error.
-
-**Chat en tiempo real**
-- Enviar mensajes que se guardan en Cloud Firestore (colección `messages`).
+**Requerimientos del laboratorio**
+- Registrarse con email y contraseña (mínimo 6 caracteres) e iniciar sesión.
+- Cerrar sesión.
+- Enviar mensajes que se guardan en Cloud Firestore.
 - Ver al instante los mensajes de todos los usuarios, ordenados por hora.
-- Distinguir los mensajes propios (derecha) de los de otros usuarios (izquierda, con avatar y email).
-- Separadores por día ("Today", "Yesterday" o la fecha) y contador de participantes.
-- Bajar solo al último mensaje y vibrar suavemente al llegar uno nuevo.
+
+**Valor agregado**
+- **Dos formas de entrar:**
+  - con la **cuenta de Google** en un solo botón, sin escribir contraseña;
+  - con una **cuenta manual** de email y contraseña (por ejemplo `raul@gmail.com`), sin verificar el correo.
+- **Chats privados:** lista de todos los usuarios registrados; al tocar uno se abre una conversación en tiempo real que solo ven esas dos personas.
+- **Lista de chats** con el último mensaje, la hora y un buscador de personas.
+- **Perfil:** foto de Google o inicial del correo, nombre, tipo de cuenta y estado en línea.
+- **Sesión recordada:** al volver a abrir la app entra directo, sin iniciar sesión otra vez.
+- Recuperar la contraseña por correo ("Forgot password?") y mostrar u ocultar la contraseña.
+- Validar los campos y mostrar mensajes de éxito o error.
+- Separadores por día ("Today", "Yesterday"), contador de participantes, desplazamiento automático al último mensaje y vibración suave al llegar uno nuevo.
+- Diseño premium en modo oscuro.
 
 ---
 
@@ -100,7 +121,9 @@ Otros que también servirían: Analytics (uso de la app), Cloud Functions (lógi
 
 - Modo oscuro con fondo negro y luces de color difuminadas.
 - Pantalla de acceso con logo animado en degradado naranja/rosa, tarjeta de vidrio, campos con icono e indicador de "6+ characters".
-- Animación al pasar del inicio de sesión al chat.
+- Botón blanco "Continue with Google" con la "G" de colores y separador "or use your email".
+- Lista de chats con tarjetas, foto o inicial de cada persona, último mensaje y hora.
+- Animación al pasar del inicio de sesión a los chats.
 - Burbujas con degradado para los mensajes propios y con borde fino para los de otros, con "cola" del lado de quien escribe.
 - Campo de mensaje que crece hasta 4 líneas y botón de envío animado.
 
