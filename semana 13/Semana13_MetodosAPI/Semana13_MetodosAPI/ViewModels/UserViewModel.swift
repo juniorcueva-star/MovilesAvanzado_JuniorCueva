@@ -35,4 +35,85 @@ class UserViewModel: ObservableObject {
             }
         }.resume()
     }
+
+    // POST: Crear un nuevo usuario
+    func createUser(name: String, email: String) {
+        guard let url = URL(string: "https://jsonplaceholder.typicode.com/users") else { return }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let newUser = User(id: 0, name: name, email: email) // id lo ignora el servidor
+
+        do {
+            request.httpBody = try JSONEncoder().encode(newUser)
+        } catch {
+            print("Error al codificar el usuario")
+            return
+        }
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let data = data {
+                if let createdUser = try? JSONDecoder().decode(User.self, from: data) {
+                    DispatchQueue.main.async {
+                        // La API de prueba siempre devuelve id 11, por eso se asigna
+                        // un id local que no se repita dentro de la lista
+                        let nextId = (self.users.map { $0.id }.max() ?? 0) + 1
+                        let user = User(id: max(createdUser.id, nextId),
+                                        name: createdUser.name,
+                                        email: createdUser.email)
+                        self.users.append(user)
+                    }
+                }
+            }
+        }.resume()
+    }
+
+    // PUT: Actualizar un usuario existente
+    func updateUser(user: User) {
+        guard let url = URL(string: "https://jsonplaceholder.typicode.com/users/\(user.id)") else { return }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        do {
+            request.httpBody = try JSONEncoder().encode(user)
+        } catch {
+            print("Error al codificar el usuario")
+            return
+        }
+
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                print("Error al actualizar: \(error)")
+                return
+            }
+
+            DispatchQueue.main.async {
+                if let index = self.users.firstIndex(where: { $0.id == user.id }) {
+                    self.users[index] = user
+                    print("Usuario actualizado localmente.")
+                } else {
+                    print("Usuario no encontrado para actualizar.")
+                }
+            }
+        }.resume()
+    }
+
+    // DELETE: Eliminar un usuario por id
+    func deleteUser(id: Int) {
+        guard let url = URL(string: "https://jsonplaceholder.typicode.com/users/\(id)") else { return }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            DispatchQueue.main.async {
+                self.users.removeAll { $0.id == id }
+                print("Usuario eliminado localmente (simulado)")
+            }
+        }.resume()
+    }
 }
