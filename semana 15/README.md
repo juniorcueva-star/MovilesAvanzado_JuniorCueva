@@ -26,7 +26,7 @@ Bundle Identifier: `pe.edu.tecsup.dma.Lab14IntroFirebase`
 5. Copiar `GoogleService-Info.plist` dentro de la carpeta `Lab14IntroFirebase/` (junto a `ContentView.swift`).
 6. Abrir `Lab14IntroFirebase.xcodeproj`, esperar a que Xcode descargue los paquetes de Firebase y ejecutar con `Cmd + R`.
 
-> `GoogleService-Info.plist` no se sube al repositorio porque contiene las claves del proyecto de Firebase (está en `.gitignore`).
+> El repositorio ya incluye `GoogleService-Info.plist` del proyecto `App01-Lab14`, así que basta con clonar, abrir el proyecto y ejecutar (los pasos 1 al 5 ya están hechos).
 
 Paquetes de Firebase usados (Swift Package Manager, `https://github.com/firebase/firebase-ios-sdk`): `FirebaseAuth`, `FirebaseCore`, `FirebaseDatabase` y `FirebaseFirestore`.
 
