@@ -8,6 +8,8 @@
 import SwiftUI
 import FirebaseAuth
 import FirebaseCore
+import GoogleSignIn
+import UIKit
 
 struct AuthView: View {
     @State private var email = ""
@@ -63,12 +65,27 @@ struct AuthView: View {
                         Text("Welcome back")
                             .font(.title3.weight(.bold))
                             .foregroundStyle(.white)
-                        Text("Use your email to continue")
+                        Text("Use Google or your email to continue")
                             .font(.subheadline)
                             .foregroundStyle(Theme.textSecondary)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
 
+                    // Opción 1: cuenta de Google con un solo botón
+                    Button {
+                        signInWithGoogle()
+                    } label: {
+                        HStack(spacing: 10) {
+                            GoogleLogo()
+                            Text("Continue with Google")
+                        }
+                    }
+                    .buttonStyle(GoogleButtonStyle())
+                    .disabled(isLoading)
+
+                    orDivider
+
+                    // Opción 2: cuenta manual con email y contraseña
                     VStack(spacing: 12) {
                         InputField(icon: "envelope.fill", placeholder: "Email", text: $email)
                         PasswordField(text: $password)
@@ -123,6 +140,21 @@ struct AuthView: View {
             .padding(.bottom, 40)
         }
         .scrollDismissesKeyboard(.interactively)
+    }
+
+    private var orDivider: some View {
+        HStack(spacing: 12) {
+            Rectangle()
+                .fill(Theme.cardBorder)
+                .frame(height: 1)
+            Text("or use your email")
+                .font(.caption)
+                .foregroundStyle(Theme.textSecondary)
+                .fixedSize()
+            Rectangle()
+                .fill(Theme.cardBorder)
+                .frame(height: 1)
+        }
     }
 
     // Indica si la contraseña cumple el mínimo de 6 caracteres
@@ -229,6 +261,7 @@ struct AuthView: View {
     func signOut() {
         do {
             try Auth.auth().signOut()
+            GIDSignIn.sharedInstance.signOut()
             isSignedIn = false
             alertMessage = "Signed out successfully"
             showAlert = true
@@ -236,6 +269,68 @@ struct AuthView: View {
             alertMessage = "Sign out failed: \(error.localizedDescription)"
             showAlert = true
         }
+    }
+
+    // MARK: - Google Sign-In
+    func signInWithGoogle() {
+        // El clientID viene de GoogleService-Info.plist (CLIENT_ID)
+        guard let clientID = FirebaseApp.app()?.options.clientID else {
+            alertMessage = "Google Sign-In is not configured. Enable Google in Firebase and download GoogleService-Info.plist again."
+            showAlert = true
+            return
+        }
+        guard let presenter = topViewController() else { return }
+
+        GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: clientID)
+        isLoading = true
+
+        // 1. Google muestra su pantalla para elegir la cuenta
+        GIDSignIn.sharedInstance.signIn(withPresenting: presenter) { result, error in
+            if let error = error {
+                isLoading = false
+                // Si el usuario cancela no se muestra ningún error
+                if (error as NSError).code != GIDSignInError.Code.canceled.rawValue {
+                    alertMessage = "Google sign in failed: \(error.localizedDescription)"
+                    showAlert = true
+                }
+                return
+            }
+
+            guard let user = result?.user, let idToken = user.idToken?.tokenString else {
+                isLoading = false
+                return
+            }
+
+            // 2. Con el token de Google se inicia sesión en Firebase
+            let credential = GoogleAuthProvider.credential(
+                withIDToken: idToken,
+                accessToken: user.accessToken.tokenString
+            )
+
+            Auth.auth().signIn(with: credential) { _, error in
+                isLoading = false
+                if let error = error {
+                    alertMessage = "Sign in failed: \(error.localizedDescription)"
+                    showAlert = true
+                } else {
+                    isSignedIn = true
+                    alertMessage = "Signed in with Google!"
+                    showAlert = true
+                }
+            }
+        }
+    }
+
+    // Pantalla desde la que se presenta la ventana de Google
+    private func topViewController() -> UIViewController? {
+        let scene = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .first { $0.activationState == .foregroundActive }
+        var top = scene?.keyWindow?.rootViewController
+        while let presented = top?.presentedViewController {
+            top = presented
+        }
+        return top
     }
 
     func resetPassword() {
@@ -270,6 +365,41 @@ struct AuthView: View {
 }
 
 // MARK: - Button Styles
+struct GoogleButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.headline)
+            .foregroundStyle(.black)
+            .frame(maxWidth: .infinity)
+            .frame(height: 54)
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .shadow(color: .white.opacity(0.15), radius: 12, y: 6)
+            .scaleEffect(configuration.isPressed ? 0.97 : 1.0)
+            .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
+    }
+}
+
+// Letra "G" con los colores de Google
+struct GoogleLogo: View {
+    var body: some View {
+        Text("G")
+            .font(.system(size: 22, weight: .bold, design: .rounded))
+            .foregroundStyle(
+                LinearGradient(
+                    colors: [
+                        Color(red: 0.26, green: 0.52, blue: 0.96),
+                        Color(red: 0.92, green: 0.26, blue: 0.21),
+                        Color(red: 0.98, green: 0.74, blue: 0.02),
+                        Color(red: 0.20, green: 0.66, blue: 0.33)
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
+    }
+}
+
 struct TrailingIconLabelStyle: LabelStyle {
     func makeBody(configuration: Configuration) -> some View {
         HStack(spacing: 8) {

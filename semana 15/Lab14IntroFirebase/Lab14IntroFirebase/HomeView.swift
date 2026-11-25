@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import GoogleSignIn
 
 // Pantalla principal: perfil, chat general y chats privados
 struct HomeView: View {
@@ -196,6 +197,7 @@ struct HomeView: View {
     private func signOut() {
         chatService.stop()
         try? Auth.auth().signOut()
+        GIDSignIn.sharedInstance.signOut()
     }
 }
 

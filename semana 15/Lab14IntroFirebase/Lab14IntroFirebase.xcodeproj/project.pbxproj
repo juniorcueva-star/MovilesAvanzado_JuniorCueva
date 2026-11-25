@@ -11,6 +11,7 @@
 		037D9C363589453E90B78027 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 824811A4D375B09BE74339D3 /* FirebaseCore */; };
 		9C5378D0F69E82CE5BCE37FA /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = B6E16A75B148B02FD1F07531 /* FirebaseDatabase */; };
 		B7F1C32D2E6B47A90DDC8F70 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6AAAFE55866DAFAFF7FDD837 /* FirebaseFirestore */; };
+		D54D4C9D82FC50BC1FD01AD2 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = C54417EEA8FF00086EE8181C /* GoogleSignIn */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 				037D9C363589453E90B78027 /* FirebaseCore in Frameworks */,
 				9C5378D0F69E82CE5BCE37FA /* FirebaseDatabase in Frameworks */,
 				B7F1C32D2E6B47A90DDC8F70 /* FirebaseFirestore in Frameworks */,
+				D54D4C9D82FC50BC1FD01AD2 /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +82,7 @@
 				824811A4D375B09BE74339D3 /* FirebaseCore */,
 				B6E16A75B148B02FD1F07531 /* FirebaseDatabase */,
 				6AAAFE55866DAFAFF7FDD837 /* FirebaseFirestore */,
+				C54417EEA8FF00086EE8181C /* GoogleSignIn */,
 			);
 			productName = Lab14IntroFirebase;
 			productReference = C364D3DEA0D345E671576B9C /* Lab14IntroFirebase.app */;
@@ -111,6 +114,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				D7180DFE28108B9555212B62 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				A03C5F348A15CF63A46D575E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5A4A31EF483A9030596059CE /* Products */;
@@ -152,6 +156,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Lab14IntroFirebase-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -183,6 +188,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Lab14IntroFirebase-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -356,6 +362,14 @@
 				minimumVersion = 12.0.0;
 			};
 		};
+		A03C5F348A15CF63A46D575E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -378,6 +392,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D7180DFE28108B9555212B62 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		C54417EEA8FF00086EE8181C /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A03C5F348A15CF63A46D575E /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

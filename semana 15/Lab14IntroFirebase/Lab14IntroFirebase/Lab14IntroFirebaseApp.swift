@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseCore
+import GoogleSignIn
 
 @main
 struct Lab14IntroFirebaseApp: App {
@@ -20,6 +21,10 @@ struct Lab14IntroFirebaseApp: App {
         WindowGroup {
             ContentView()
                 .preferredColorScheme(.dark) // La app siempre se muestra en modo oscuro
+                .onOpenURL { url in
+                    // Recibe la respuesta de Google al terminar el inicio de sesión
+                    GIDSignIn.sharedInstance.handle(url)
+                }
         }
     }
 }
