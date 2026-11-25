@@ -126,21 +126,22 @@ class PrivateChatService: ObservableObject {
         listener = nil
     }
 
-    func send(text: String) {
+    func send(text: String, imageData: Data? = nil) {
         guard let me = Auth.auth().currentUser else { return }
 
         let message = Message(
             id: UUID().uuidString,
             text: text,
             userEmail: me.email ?? "Unknown",
-            timestamp: Date()
+            timestamp: Date(),
+            imageData: imageData
         )
 
         // Resumen para la lista de chats (último mensaje y hora)
         let summary = ChatSummary(
             id: chatId,
             participants: [me.uid, otherUser.id],
-            lastMessage: text,
+            lastMessage: imageData == nil ? text : "📷 Photo",
             lastSenderEmail: message.userEmail,
             lastTimestamp: message.timestamp
         )

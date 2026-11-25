@@ -35,9 +35,15 @@ struct PrivateChatView: View {
                 emptySubtitle: "Only you and \(otherUser.displayName) can see this conversation."
             )
 
-            ChatInputBar(text: $newMessage) { text in
-                chatService.send(text: text)
-            }
+            ChatInputBar(
+                text: $newMessage,
+                onSend: { text in
+                    chatService.send(text: text)
+                },
+                onSendImage: { imageData in
+                    chatService.send(text: "", imageData: imageData)
+                }
+            )
         }
         .background(AppBackground())
         .toolbar {

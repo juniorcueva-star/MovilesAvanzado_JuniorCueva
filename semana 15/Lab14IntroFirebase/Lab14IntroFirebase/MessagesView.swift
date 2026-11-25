@@ -32,9 +32,15 @@ struct MessagesView: View {
             )
 
             // New message input
-            ChatInputBar(text: $newMessage) { text in
-                databaseService.addMessage(text: text)
-            }
+            ChatInputBar(
+                text: $newMessage,
+                onSend: { text in
+                    databaseService.addMessage(text: text)
+                },
+                onSendImage: { imageData in
+                    databaseService.addImageMessage(imageData: imageData)
+                }
+            )
         }
         .background(AppBackground())
         .toolbar {

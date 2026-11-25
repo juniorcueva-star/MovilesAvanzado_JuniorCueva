@@ -17,6 +17,7 @@ Bundle Identifier: `pe.edu.tecsup.dma.Lab14IntroFirebase`
 | `ChatService.swift` | Perfiles de usuario, conversaciones privadas y sus mensajes en Firestore |
 | `PrivateChatView.swift` | Conversación privada entre dos usuarios |
 | `ChatComponents.swift` | Lista de mensajes, burbujas, separadores por día y barra de envío reutilizables |
+| `ImageCompressor.swift` | Reduce y comprime las fotos para guardarlas en Firestore |
 | `ChatModels.swift` | Modelos `AppUser`, `ChatSummary` y rutas de navegación |
 | `Theme.swift` | Colores, fondo, avatares y campos reutilizables del diseño |
 
@@ -41,7 +42,7 @@ Estructura en Cloud Firestore:
 
 | Colección | Contenido |
 |---|---|
-| `messages` | Mensajes del chat general |
+| `messages` | Mensajes del chat general (texto o foto) |
 | `users` | Perfil de cada usuario (uid, email, nombre y foto) |
 | `chats` | Una conversación privada por pareja de usuarios (participantes y último mensaje) |
 | `chats/{id}/messages` | Mensajes de esa conversación privada |
@@ -107,6 +108,7 @@ Otros que también servirían: Analytics (uso de la app), Cloud Functions (lógi
   - con la **cuenta de Google** en un solo botón, sin escribir contraseña;
   - con una **cuenta manual** de email y contraseña (por ejemplo `raul@gmail.com`), sin verificar el correo.
 - **Chats privados:** lista de todos los usuarios registrados; al tocar uno se abre una conversación en tiempo real que solo ven esas dos personas.
+- **Enviar fotos** de la galería en el chat general y en los chats privados; se ven en la burbuja y al tocarlas se abren en pantalla completa con zoom.
 - **Lista de chats** con el último mensaje, la hora y un buscador de personas.
 - **Perfil:** foto de Google o inicial del correo, nombre, tipo de cuenta y estado en línea.
 - **Sesión recordada:** al volver a abrir la app entra directo, sin iniciar sesión otra vez.
@@ -126,6 +128,9 @@ Otros que también servirían: Analytics (uso de la app), Cloud Functions (lógi
 - Animación al pasar del inicio de sesión a los chats.
 - Burbujas con degradado para los mensajes propios y con borde fino para los de otros, con "cola" del lado de quien escribe.
 - Campo de mensaje que crece hasta 4 líneas y botón de envío animado.
+- Botón de galería junto al campo de mensaje y visor de fotos a pantalla completa.
+
+> Las fotos se guardan comprimidas (JPEG de máximo 1024 px y ~600 KB) dentro del mismo documento del mensaje en Firestore, porque Firebase Storage requiere el plan de pago Blaze. Firestore admite hasta 1 MB por documento.
 
 ---
 

@@ -35,6 +35,26 @@ class DatabaseService: ObservableObject {
         }
     }
 
+    // Add a photo message (the photo is stored inside the document, compressed)
+    func addImageMessage(imageData: Data) {
+
+        guard let user = Auth.auth().currentUser else { return }
+
+        let message = Message(
+            id: UUID().uuidString,
+            text: "",
+            userEmail: user.email ?? "Unknown",
+            timestamp: Date(),
+            imageData: imageData
+        )
+
+        do {
+            try db.collection("messages").document(message.id).setData(from: message)
+        } catch {
+            print("Error adding photo: \(error)")
+        }
+    }
+
     // Listen for real-time updates
     func startListening() {
         listener?.remove()
@@ -65,4 +85,9 @@ struct Message: Identifiable, Codable {
     let text: String
     let userEmail: String
     let timestamp: Date
+    var imageData: Data? = nil   // Foto en JPEG comprimido (solo en mensajes con foto)
+
+    var isPhoto: Bool {
+        imageData != nil
+    }
 }

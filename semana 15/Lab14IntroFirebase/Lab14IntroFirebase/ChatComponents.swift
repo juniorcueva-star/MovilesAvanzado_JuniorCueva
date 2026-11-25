@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 // MARK: - Lista de mensajes (chat general y chats privados)
 struct MessagesListView: View {
@@ -99,6 +100,10 @@ struct MessagesListView: View {
 struct ChatInputBar: View {
     @Binding var text: String
     let onSend: (String) -> Void
+    var onSendImage: ((Data) -> Void)? = nil
+
+    @State private var photoItem: PhotosPickerItem?
+    @State private var isProcessingPhoto = false
 
     private var trimmed: String {
         text.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -106,6 +111,28 @@ struct ChatInputBar: View {
 
     var body: some View {
         HStack(alignment: .bottom, spacing: 10) {
+            // Botón para elegir una foto de la galería
+            if onSendImage != nil {
+                PhotosPicker(selection: $photoItem, matching: .images) {
+                    ZStack {
+                        if isProcessingPhoto {
+                            ProgressView()
+                                .tint(.white)
+                        } else {
+                            Image(systemName: "photo.on.rectangle.angled")
+                                .font(.system(size: 18, weight: .semibold))
+                                .foregroundStyle(Theme.orange)
+                        }
+                    }
+                    .frame(width: 46, height: 46)
+                    .background(Theme.card)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Theme.cardBorder, lineWidth: 1))
+                }
+                .disabled(isProcessingPhoto)
+                .accessibilityLabel("Send photo")
+            }
+
             TextField("Type a message...", text: $text, axis: .vertical)
                 .lineLimit(1...4)
                 .foregroundStyle(.white)
@@ -141,6 +168,24 @@ struct ChatInputBar: View {
             Rectangle()
                 .fill(Theme.cardBorder)
                 .frame(height: 1)
+        }
+        .onChange(of: photoItem) {
+            sendSelectedPhoto()
+        }
+    }
+
+    // Carga la foto elegida, la comprime y la envía
+    private func sendSelectedPhoto() {
+        guard let item = photoItem, let onSendImage else { return }
+        isProcessingPhoto = true
+
+        Task {
+            if let data = try? await item.loadTransferable(type: Data.self),
+               let compressed = ImageCompressor.compress(data) {
+                onSendImage(compressed)
+            }
+            isProcessingPhoto = false
+            photoItem = nil
         }
     }
 
@@ -204,6 +249,13 @@ struct MessageBubble: View {
     let isMine: Bool
     var showsSender: Bool = true
 
+    @State private var showPhoto = false
+
+    // Foto del mensaje (si tiene)
+    private var photo: UIImage? {
+        message.imageData.flatMap { UIImage(data: $0) }
+    }
+
     // Esquinas redondeadas con una "cola" del lado de quien escribe
     private var bubbleShape: UnevenRoundedRectangle {
         UnevenRoundedRectangle(
@@ -231,9 +283,24 @@ struct MessageBubble: View {
                         .lineLimit(1)
                 }
 
-                Text(message.text)
-                    .font(.body)
-                    .foregroundStyle(.white)
+                if let photo {
+                    // Se toca para verla en pantalla completa
+                    Image(uiImage: photo)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 210, height: photoHeight(for: photo))
+                        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            showPhoto = true
+                        }
+                }
+
+                if !message.text.isEmpty {
+                    Text(message.text)
+                        .font(.body)
+                        .foregroundStyle(.white)
+                }
 
                 HStack(spacing: 4) {
                     Text(message.timestamp, style: .time)
@@ -244,8 +311,8 @@ struct MessageBubble: View {
                 .font(.caption2)
                 .foregroundStyle(.white.opacity(0.65))
             }
-            .padding(.horizontal, 14)
-            .padding(.vertical, 10)
+            .padding(.horizontal, message.isPhoto ? 6 : 14)
+            .padding(.vertical, message.isPhoto ? 6 : 10)
             .background(bubbleBackground)
             .clipShape(bubbleShape)
             .overlay(
@@ -258,6 +325,18 @@ struct MessageBubble: View {
                 Spacer(minLength: 50)
             }
         }
+        .fullScreenCover(isPresented: $showPhoto) {
+            if let photo {
+                PhotoViewer(image: photo, sender: message.userEmail, date: message.timestamp)
+            }
+        }
+    }
+
+    // Alto de la foto según su forma (vertical u horizontal), con límites
+    private func photoHeight(for image: UIImage) -> CGFloat {
+        guard image.size.width > 0 else { return 210 }
+        let ratio = image.size.height / image.size.width
+        return 210 * min(max(ratio, 0.6), 1.4)
     }
 
     @ViewBuilder
@@ -266,6 +345,66 @@ struct MessageBubble: View {
             Theme.gradient
         } else {
             Theme.card
+        }
+    }
+}
+
+// MARK: - Foto en pantalla completa
+struct PhotoViewer: View {
+    let image: UIImage
+    let sender: String
+    let date: Date
+
+    @Environment(\.dismiss) private var dismiss
+    @State private var scale: CGFloat = 1
+
+    var body: some View {
+        ZStack(alignment: .top) {
+            Color.black
+                .ignoresSafeArea()
+
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFit()
+                .scaleEffect(scale)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .gesture(
+                    // Pellizcar para hacer zoom
+                    MagnifyGesture()
+                        .onChanged { value in
+                            scale = max(1, value.magnification)
+                        }
+                        .onEnded { _ in
+                            withAnimation(.spring) {
+                                scale = 1
+                            }
+                        }
+                )
+
+            HStack {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(sender)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.white)
+                    Text(date.formatted(date: .abbreviated, time: .shortened))
+                        .font(.caption)
+                        .foregroundStyle(.white.opacity(0.7))
+                }
+                Spacer()
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "xmark")
+                        .font(.headline)
+                        .foregroundStyle(.white)
+                        .frame(width: 40, height: 40)
+                        .background(.ultraThinMaterial)
+                        .clipShape(Circle())
+                }
+                .accessibilityLabel("Close")
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 10)
         }
     }
 }
