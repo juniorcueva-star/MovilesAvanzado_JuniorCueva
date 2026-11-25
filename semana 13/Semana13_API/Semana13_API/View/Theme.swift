@@ -14,6 +14,7 @@ enum Theme {
 
     static let background = Color(.systemGroupedBackground)
     static let card = Color(.secondarySystemGroupedBackground)
+    static let cardBorder = Color.white.opacity(0.08)  // borde fino para separar las tarjetas del fondo
 
     static let gradient = LinearGradient(
         colors: [primary, secondary],

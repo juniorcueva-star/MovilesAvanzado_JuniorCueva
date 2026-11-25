@@ -85,7 +85,11 @@ struct SearchBar: View {
         .padding(.vertical, 12)
         .background(Theme.card)
         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
-        .shadow(color: .black.opacity(0.05), radius: 8, y: 3)
+        .overlay(
+            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                .stroke(Theme.cardBorder, lineWidth: 1)
+        )
+        .shadow(color: .black.opacity(0.35), radius: 8, y: 3)
     }
 }
 
@@ -115,7 +119,11 @@ struct UserRowView: View {
         .padding(14)
         .background(Theme.card)
         .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-        .shadow(color: .black.opacity(0.06), radius: 10, y: 4)
+        .overlay(
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .stroke(Theme.cardBorder, lineWidth: 1)
+        )
+        .shadow(color: .black.opacity(0.35), radius: 10, y: 4)
     }
 }
 
@@ -143,7 +151,11 @@ struct FormField: View {
             .padding(14)
             .background(Theme.card)
             .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
-            .shadow(color: .black.opacity(0.05), radius: 6, y: 2)
+            .overlay(
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .stroke(Theme.cardBorder, lineWidth: 1)
+            )
+            .shadow(color: .black.opacity(0.35), radius: 6, y: 2)
         }
     }
 }

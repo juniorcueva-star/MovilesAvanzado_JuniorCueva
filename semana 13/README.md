@@ -17,6 +17,7 @@ Para abrir cada proyecto: doble clic en el archivo `.xcodeproj` de su carpeta, e
 
 ### Diseño
 
+- Las tres apps se muestran siempre en **modo oscuro** (`.preferredColorScheme(.dark)`), con tarjetas de borde fino y un color de acento más claro para que se lea bien sobre fondo negro.
 - Tarjeta superior con degradado índigo/violeta y el total de usuarios.
 - Avatares circulares con las iniciales de cada usuario y un color según su id.
 - Filas en forma de tarjeta con sombra suave y buscador con icono y botón para limpiar.
