@@ -62,22 +62,40 @@ struct AppBackground: View {
     }
 }
 
-// Círculo con la inicial del email
+// Foto del usuario (cuentas de Google) o círculo con la inicial del email
 struct AvatarView: View {
     let email: String
     var size: CGFloat = 40
+    var photoURL: String? = nil
 
     private var initial: String {
         email.first.map { String($0).uppercased() } ?? "?"
     }
 
     var body: some View {
+        Group {
+            if let photoURL, let url = URL(string: photoURL) {
+                AsyncImage(url: url) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                } placeholder: {
+                    initialView
+                }
+            } else {
+                initialView
+            }
+        }
+        .frame(width: size, height: size)
+        .clipShape(Circle())
+    }
+
+    private var initialView: some View {
         Text(initial)
             .font(.system(size: size * 0.42, weight: .bold, design: .rounded))
             .foregroundStyle(.white)
             .frame(width: size, height: size)
             .background(Theme.avatarGradient(for: email))
-            .clipShape(Circle())
     }
 }
 

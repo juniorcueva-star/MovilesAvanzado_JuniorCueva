@@ -261,6 +261,10 @@ struct AuthView: View {
     func checkAuthState() {
         // Listen for authentication state changes and store the listener handle
         authStateListener = Auth.auth().addStateDidChangeListener { auth, user in
+            // Guarda el perfil para que aparezca en la lista de chats privados
+            if user != nil {
+                ChatService.saveCurrentUser()
+            }
             DispatchQueue.main.async {
                 self.isSignedIn = user != nil
             }

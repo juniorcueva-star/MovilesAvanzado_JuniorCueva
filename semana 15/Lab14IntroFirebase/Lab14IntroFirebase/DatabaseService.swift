@@ -12,6 +12,7 @@ import FirebaseAuth
 class DatabaseService: ObservableObject {
 
     private let db = Firestore.firestore()
+    private var listener: ListenerRegistration?
     @Published var messages: [Message] = []
 
     // Add a message to database
@@ -36,18 +37,25 @@ class DatabaseService: ObservableObject {
 
     // Listen for real-time updates
     func startListening() {
-        db.collection("messages")
+        listener?.remove()
+        listener = db.collection("messages")
             .order(by: "timestamp", descending: false)
-            .addSnapshotListener { querySnapshot, error in
+            .addSnapshotListener { [weak self] querySnapshot, error in
                 if let error = error {
                     print("Error getting messages: \(error)")
                     return
                 }
 
-                self.messages = querySnapshot?.documents.compactMap { document in
+                self?.messages = querySnapshot?.documents.compactMap { document in
                     try? document.data(as: Message.self)
                 } ?? []
             }
+    }
+
+    // Stop listening when the chat is closed
+    func stopListening() {
+        listener?.remove()
+        listener = nil
     }
 }
 
