@@ -15,6 +15,16 @@ Los tres proyectos usan la arquitectura **MVVM** con las carpetas `Models`, `Vie
 
 Para abrir cada proyecto: doble clic en el archivo `.xcodeproj` de su carpeta, elegir un simulador de iPhone y ejecutar con `Cmd + R`.
 
+### Diseño
+
+- Tarjeta superior con degradado índigo/violeta y el total de usuarios.
+- Avatares circulares con las iniciales de cada usuario y un color según su id.
+- Filas en forma de tarjeta con sombra suave y buscador con icono y botón para limpiar.
+- Estados de carga y de "sin resultados" (`ProgressView` y `ContentUnavailableView`).
+- Botón flotante "Agregar Usuario" y formulario con vista previa del avatar, campos con icono y validación.
+- En la actividad 03 se puede deslizar hacia abajo para recargar la lista (`.refreshable`).
+- Los colores y componentes reutilizables están en `View/Theme.swift` y `View/Components.swift`.
+
 ---
 
 ## Actividad 01

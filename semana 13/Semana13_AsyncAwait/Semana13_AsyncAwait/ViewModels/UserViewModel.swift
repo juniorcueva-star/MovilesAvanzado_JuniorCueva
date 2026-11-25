@@ -10,6 +10,7 @@ import Foundation
 class UserViewModel: ObservableObject {
     @Published var users: [User] = []
     @Published var searchText: String = ""
+    @Published var isLoading: Bool = false
 
     var filteredUsers: [User] {
         if searchText.isEmpty {
@@ -25,15 +26,23 @@ class UserViewModel: ObservableObject {
     func fetchUsers() async {
         guard let url = URL(string: "https://jsonplaceholder.typicode.com/users") else { return }
 
+        await MainActor.run {
+            self.isLoading = true
+        }
+
         do {
             let (data, _) = try await URLSession.shared.data(from: url)
             let decodedUsers = try JSONDecoder().decode([User].self, from: data)
 
             await MainActor.run {
                 self.users = decodedUsers
+                self.isLoading = false
             }
         } catch {
             print("Error fetching users: \(error)")
+            await MainActor.run {
+                self.isLoading = false
+            }
         }
     }
 
