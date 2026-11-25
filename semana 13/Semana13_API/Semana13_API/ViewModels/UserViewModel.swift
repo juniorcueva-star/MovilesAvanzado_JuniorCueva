@@ -13,6 +13,7 @@ class UserViewModel: ObservableObject {
     // Publica una lista de usuarios para que la vista se actualice automáticamente cuando cambie
     @Published var users: [User] = []
     @Published var searchText: String = ""        // Texto del filtro
+    @Published var isLoading: Bool = false        // Indica si se está cargando la lista
 
     // Computed property que filtra los usuarios según el texto ingresado
     var filteredUsers: [User] {
@@ -32,6 +33,7 @@ class UserViewModel: ObservableObject {
             print("URL inválida")
             return
         }
+        isLoading = true
 
         // Inicia una tarea de red para obtener datos desde la URL
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -45,14 +47,17 @@ class UserViewModel: ObservableObject {
                     // Actualiza la propiedad 'users' en el hilo principal para que la vista se refresque
                     DispatchQueue.main.async {
                         self.users = decodedUsers
+                        self.isLoading = false
                     }
                 } catch {
                     // Imprime el error si la decodificación falla
                     print("Error al decodificar: \(error)")
+                    DispatchQueue.main.async { self.isLoading = false }
                 }
             } else if let error = error {
                 // Si hay un error de red, se imprime
                 print("Error de red: \(error)")
+                DispatchQueue.main.async { self.isLoading = false }
             }
         }.resume() // Se llama a resume() para que la tarea se ejecute
     }
