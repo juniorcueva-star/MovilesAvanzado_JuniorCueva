@@ -52,6 +52,7 @@ Inicializa Firebase en la app. Lee la configuración de `GoogleService-Info.plis
 - `signIn(withEmail:password:completion:)`: inicia sesión con un usuario ya registrado. Devuelve un `AuthDataResult` con el usuario o un error si los datos son incorrectos.
 - `signOut()`: cierra la sesión del usuario actual. Es una función que puede lanzar errores, por eso se usa con `try` dentro de `do/catch`.
 - `addStateDidChangeListener(_:)`: registra un oyente que se ejecuta cada vez que cambia el estado de la sesión (al iniciar la app, al entrar o al salir). Devuelve un `AuthStateDidChangeListenerHandle`. Se usa para actualizar `isSignedIn` automáticamente.
+- `sendPasswordReset(withEmail:completion:)`: envía al correo del usuario un enlace para crear una nueva contraseña (botón "Forgot password?").
 - `currentUser`: el usuario que tiene la sesión iniciada (o `nil`). Se usa en `DatabaseService` y `MessagesView` para obtener su email.
 
 ---
@@ -76,13 +77,32 @@ Otros que también servirían: Analytics (uso de la app), Cloud Functions (lógi
 
 ---
 
+## Requerimientos (qué hace la app)
+
+**Cuenta y sesión**
+- Registrarse con email y contraseña (mínimo 6 caracteres).
+- Iniciar y cerrar sesión.
+- Recordar la sesión: al volver a abrir la app entra directo al chat.
+- Recuperar la contraseña por correo ("Forgot password?").
+- Mostrar u ocultar la contraseña.
+- Validar los campos y mostrar mensajes de éxito o error.
+
+**Chat en tiempo real**
+- Enviar mensajes que se guardan en Cloud Firestore (colección `messages`).
+- Ver al instante los mensajes de todos los usuarios, ordenados por hora.
+- Distinguir los mensajes propios (derecha) de los de otros usuarios (izquierda, con avatar y email).
+- Separadores por día ("Today", "Yesterday" o la fecha) y contador de participantes.
+- Bajar solo al último mensaje y vibrar suavemente al llegar uno nuevo.
+
+---
+
 ## Diseño
 
-- Modo oscuro con fondo negro y dos luces de color difuminadas.
-- Pantalla de acceso con logo en degradado naranja/rosa, campos con icono y botón para mostrar u ocultar la contraseña.
-- Indicador de carga mientras Firebase responde.
-- Chat con burbujas: los mensajes propios a la derecha con degradado y los de otros usuarios a la izquierda con su avatar y email.
-- La lista baja sola al último mensaje y el campo de texto crece hasta 4 líneas.
+- Modo oscuro con fondo negro y luces de color difuminadas.
+- Pantalla de acceso con logo animado en degradado naranja/rosa, tarjeta de vidrio, campos con icono e indicador de "6+ characters".
+- Animación al pasar del inicio de sesión al chat.
+- Burbujas con degradado para los mensajes propios y con borde fino para los de otros, con "cola" del lado de quien escribe.
+- Campo de mensaje que crece hasta 4 líneas y botón de envío animado.
 
 ---
 
